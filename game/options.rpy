@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("Town Girls DEMO - Purchase full game at: https://store.steampowered.com/app/2212600/Town_Girls/")
+define config.name = _("Town Girls Demo - Purchase full version at: https://windowslogic.itch.io/town-girls")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -61,7 +61,7 @@ define config.has_voice = True
 ## the player is at the main menu. This file will continue playing into the
 ## game, until it is stopped or another file is played.
 
-define config.main_menu_music = "audio/menu.tgm"
+define config.main_menu_music = "audio/menu.flac"
 
 
 ## Transitions #################################################################
@@ -72,23 +72,23 @@ define config.main_menu_music = "audio/menu.tgm"
 
 ## Entering or exiting the game menu.
 
-define config.enter_transition = dissolve
-define config.exit_transition = dissolve
+define config.enter_transition = pixellate
+define config.exit_transition = pixellate
 
 
 ## Between screens of the game menu.
 
-define config.intra_transition = dissolve
+define config.intra_transition = pixellate
 
 
 ## A transition that is used after a game has been loaded.
 
-define config.after_load_transition = None
+define config.after_load_transition = irisout
 
 
 ## Used when entering the main menu after the game has ended.
 
-define config.end_game_transition = None
+define config.end_game_transition = irisin
 
 
 ## A variable to set the transition used when the game starts does not exist.
@@ -187,6 +187,7 @@ init python:
 
     build.classify('game/**.png', 'archive')
     build.classify('game/**.jpg', 'archive')
+    build.classify('game/**.flac', 'archive')
 
     ## Files matching documentation patterns are duplicated in a mac app build,
     ## so they appear in both the app and the zip file.

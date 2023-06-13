@@ -70,7 +70,7 @@ define gui.text_size = 32
 define gui.name_text_size = 65
 
 ## The size of text in the game's user interface.
-define gui.interface_text_size = 32
+define gui.interface_text_size = 36
 
 ## The size of labels in the game's user interface.
 define gui.label_text_size = 36
@@ -128,11 +128,11 @@ define gui.namebox_tile = False
 ## The placement of dialogue relative to the textbox. These can be a whole
 ## number of pixels relative to the left or top side of the textbox, or 0.5 to
 ## center.
-define gui.dialogue_xpos = 0.2
+define gui.dialogue_xpos = 402
 define gui.dialogue_ypos = 75
 
 ## The maximum width of dialogue text, in pixels.
-define gui.dialogue_width = 1000
+define gui.dialogue_width = 1116
 
 ## The horizontal alignment of the dialogue text. This can be 0.0 for left-
 ## aligned, 0.5 for centered, and 1.0 for right-aligned.

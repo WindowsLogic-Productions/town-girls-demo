@@ -1,11 +1,100 @@
+#Violet's opening scene.
+
+label date_violet_opening:
+
+    jump date_violet_timecheck
+return
+
+# Check time of game to determine if dates are possible.
+
+label date_violet_timecheck:
+
+    scene loading
+    with irisout
+    
+    $ _game_menu_screen = None
+    $ quick_menu = False
+
+    if time == 1:
+        
+        if violet == 1:
+            jump date_violet_1_pc
+        elif violet == 2:
+            jump date_violet_2_pc
+        else:
+            jump date_violet_sex_letter
+    elif time == 2:
+        if violet == 1:
+            jump date_violet_1_pc
+        elif violet == 2:
+            jump date_violet_2_pc
+        else:
+            jump date_violet_sex_letter
+    else:
+        
+        stop music fadeout 3.0
+    
+        pause 3.0
+    
+        play music "audio/time_advance_ph.flac" loop fadein 3.0
+    
+        pause 3.0
+        
+        scene black
+        with dissolve
+        
+        n "It's too late to date Violet, do you want to sleep to advance time?"
+        
+        menu:
+            "Go to sleep":
+            
+                n "You sleep until it's morning."
+                
+                $ time = 1
+                
+                jump main_hub_screen
+                
+            "Go to Violet's house and watch her sleep until morning":
+                
+                n "You go to Violet's house with a ladder. Her bedroom window is open so you position the ladder and climb up to see her sleeping."
+                
+                $ nightstalk = renpy.random.randint(1, 4)
+                
+                if nightstalk == 1:
+                    n "You find Violet sleeping naked."
+                    
+                    scene v_sleeping
+                    with pixellate
+                elif nightstalk == 2:
+                    n "You find Violet sleeping naked with wetness coming out of her vagina."
+                    
+                    scene v_sleeping
+                    with pixellate
+                elif nightstalk == 3:
+                    n "You find Violet sleeping naked with a dildo inside her vagina."
+                    
+                    scene v_sleeping
+                    with pixellate
+                else:
+                    n "You find Violet sleeping naked, so you decide to fuck her while she's asleep."
+                    
+                    scene v_sleeping
+                    with pixellate
+                
+                $ time = 1
+                
+                stop music fadeout 3.0
+    
+                pause 3.0
+        
+                jump main_hub_screen
+return
+
 # Violet first date.
 
 label date_violet_1_pc:
 
     $ achievement.grant("first")
-    
-    scene black
-    with dissolve
     
     $ tooltip = Tooltip("")
     
@@ -14,11 +103,9 @@ label date_violet_1_pc:
     pause 3.0
     
     scene v_house_front
-    with dissolve
+    with irisout
     
-    play music "audio/nature.tgm" loop fadein 3.0
-    
-    n "You don't know anything about this girl you found at a music shop. But she seems nice, so you asked to talk to her at her house and she agreed."
+    play music "audio/nature.flac" loop fadein 3.0
     
     n "You arrive at the Arctic Fox's house and see her outside with her garage open."
     
@@ -29,98 +116,98 @@ label date_violet_1_pc:
 
     screen date_violet_1_objects:
         
-        imagebutton auto "v_electric_%s":
+        imagebutton auto "violet/date_1/v_electric_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.334
             ypos 0.35
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("The Arctic Fox's electric guitar is so cool.") ]
-            clicked [ Play("sound", "audio/e_guitar_strum.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("The Arctic Fox's electric guitar is so cool.") ]
+            clicked [ Play("sound", "audio/e_guitar_strum.flac") ]
             
-        imagebutton auto "v_acoustic_%s":
+        imagebutton auto "violet/date_1/v_acoustic_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.366
             ypos 0.356
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("It rattles.") ]
-            clicked [ Play("sound", "audio/guitar_strum.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("It rattles.") ]
+            clicked [ Play("sound", "audio/guitar_strum.flac") ]
             
-        imagebutton auto "v_amp_%s":
+        imagebutton auto "violet/date_1/v_amp_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.4
             ypos 0.426
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Pretty rad amp with tons of dials.") ]
-            clicked [ Play("sound", "audio/amp.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Pretty rad amp with tons of dials.") ]
+            clicked [ Play("sound", "audio/amp.flac") ]
             
-        imagebutton auto "v_wires_left_%s":
+        imagebutton auto "violet/date_1/v_wires_left_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.27
             ypos 0.401
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Just a bunch of audio cables.") ]
-            clicked [ Play("sound", "audio/boing.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Just a bunch of audio cables.") ]
+            clicked [ Play("sound", "audio/boing.flac") ]
             
-        imagebutton auto "v_wires_right_%s":
+        imagebutton auto "violet/date_1/v_wires_right_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.46
             ypos 0.380
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Just a bunch of audio cables.") ]
-            clicked [ Play("sound", "audio/boing.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Just a bunch of audio cables.") ]
+            clicked [ Play("sound", "audio/boing.flac") ]
             
-        imagebutton auto "v_mini_amp_%s":
+        imagebutton auto "violet/date_1/v_mini_amp_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.47
             ypos 0.41
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("A miniture tube amp.") ]
-            clicked [ Play("sound", "audio/amp.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A miniture tube amp.") ]
+            clicked [ Play("sound", "audio/amp.flac") ]
             
-        imagebutton auto "tree_%s":
+        imagebutton auto "violet/date_1/tree_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.864
             ypos 0.337
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("I'd like to be a tree.") ]
-            clicked [ Play("sound", "audio/tree.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("I'd like to be a tree.") ]
+            clicked [ Play("sound", "audio/tree.flac") ]
             
         if window_crack_v == 0:
-            imagebutton auto "v_window_%s":
+            imagebutton auto "violet/date_1/v_window_%s.png":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.053
                 ypos 0.351
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("A window of the Arctic Fox's house.") ]
-                clicked [ Play("sound", "audio/glass_knock.tgm"), tooltip.Action("A small crack appeared."), SetVariable("window_crack_v", 1) ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A window of the Arctic Fox's house.") ]
+                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("A small crack appeared."), SetVariable("window_crack_v", 1) ]
         elif window_crack_v == 1:
-            imagebutton auto "v_window_%s":
+            imagebutton auto "violet/date_1/v_window_%s.png":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.053
                 ypos 0.351
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("A small crack appeared.") ]
-                clicked [ Play("sound", "audio/glass_knock.tgm"), tooltip.Action("Another small crack appeared."), SetVariable("window_crack_v", 2) ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A small crack appeared.") ]
+                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("Another small crack appeared."), SetVariable("window_crack_v", 2) ]
         elif window_crack_v == 2:
-            imagebutton auto "v_window_%s":
+            imagebutton auto "violet/date_1/v_window_%s.png":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.053
                 ypos 0.351
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Another small crack appeared.") ]
-                clicked [ Play("sound", "audio/glass_knock.tgm"), tooltip.Action("A bigger crack appeared."), SetVariable("window_crack_v", 3) ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Another small crack appeared.") ]
+                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("A bigger crack appeared."), SetVariable("window_crack_v", 3) ]
         elif window_crack_v == 3:
-            imagebutton auto "v_window_%s":
+            imagebutton auto "violet/date_1/v_window_%s.png":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.053
                 ypos 0.351
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("A bigger crack appeared.") ]
-                clicked [ Play("sound", "audio/glass_break.tgm"), tooltip.Action("You broke the window."), SetVariable("window_crack_v", 4) ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A bigger crack appeared.") ]
+                clicked [ Play("sound", "audio/glass_break.flac"), tooltip.Action("You broke the window."), SetVariable("window_crack_v", 4) ]
                 
         else:
         
-            imagebutton idle "v_window_cracked":
+            imagebutton idle "violet/date_1/v_window_cracked.png":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.053
@@ -129,26 +216,28 @@ label date_violet_1_pc:
                 action tooltip.Action("You broke the window.")
         
         if window_crack_v == 4:
+        
+            $ window_cracked += 1
             
-            imagebutton auto "violet_click_%s":
+            imagebutton auto "violet/date_1/violet_click_%s.png":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.55
                 ypos 0.55
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Arctic Fox: You know you're paying for\nthat window right?") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Arctic Fox: You know you're paying for\nthat window right?") ]
                 action Jump("date_violet_1")
         else:
-            imagebutton auto "violet_click_%s":
+            imagebutton auto "violet/date_1/violet_click_%s.png":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.55
                 ypos 0.55
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Arctic Fox: Hey there cutie.") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Arctic Fox: What's up?") ]
                 action Jump("date_violet_1")
             
-        text tooltip.value:
-            xpos 0.21
-            ypos 0.75
+        text tooltip.value outlines [(2, "#fff")]:
+            xpos 0.1
+            ypos 0.1
     return
 return
 
@@ -156,7 +245,7 @@ label date_violet_1:
 
     if window_cracked == 1:
         $ achievement.grant("window")
-    elif window_cracked == 2:
+    else:
         $ achievement.grant("windowfetish")
 
     if window_crack_v == 4:
@@ -170,11 +259,11 @@ label date_violet_1:
     
     pause 3.0
     
-    play music "audio/violet_theme.tgm" loop fadein 3.0
+    play music "audio/violet_theme.flac" loop fadein 3.0
     
     show violet neutral at center with dissolve
     
-    v "Oh hey, it's you from the other day. Did you have a safe trip here? The name's Violet, what's yours?"
+    v "Oh hey, I think I saw from the other day. You were staring at me. The name's Violet, what's yours?"
     
     $ violet_name = renpy.input("Enter a name you want Violet to remember.")
     $ violet_name = violet_name.strip()
@@ -183,7 +272,7 @@ label date_violet_1:
         
     $ renpy.block_rollback()
     
-    play audio "audio/remember.tgm"
+    play audio "audio/remember.flac"
     n "Violet will remember that."
     
     show violet giggle at center with dissolve
@@ -301,7 +390,7 @@ label date_violet_1:
     elif gender == 1:
         pv "I'm from [violet_from], I moved here to attend a university in the area."
     
-    play audio "audio/remember.tgm"
+    play audio "audio/remember.flac"
     n "Violet will remember that."
     
     show violet happy at center with dissolve
@@ -315,9 +404,6 @@ return
 # Violet second date.
 
 label date_violet_2_pc:
-
-    scene black
-    with dissolve
     
     $ tooltip = Tooltip("")
     
@@ -326,9 +412,9 @@ label date_violet_2_pc:
     pause 3.0
 
     scene v_abandoned_cinema
-    with dissolve
+    with irisout
     
-    play music "audio/abandoned.tgm" loop fadein 3.0
+    play music "audio/abandoned.flac" loop fadein 3.0
     
     n "Violet visits you at your place and takes you to an abandoned cinema. The vacant venue reeks with the smell of fish."
     
@@ -341,32 +427,32 @@ label date_violet_2_pc:
             yanchor 0.5
             xpos 0.322
             ypos 0.58
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("A fancy-looking stage for theatre plays.\nThe curtains are damp with white-ish yellow\nstains and fishy smell.") ]
-            clicked [ Play("sound", "audio/stage.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A fancy-looking stage for theatre plays.\nThe curtains are damp with white-ish yellow\nstains and fishy smell.") ]
+            clicked [ Play("sound", "audio/stage.flac") ]
             
         imagebutton auto "violet/date_2/v_door_right_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.54
             ypos 0.534
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("A door leading to a fishy-smelling room.") ]
-            clicked [ Play("sound", "audio/object_falling.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A door leading to a fishy-smelling room.") ]
+            clicked [ Play("sound", "audio/object_falling.flac") ]
             
         imagebutton auto "violet/date_2/v_door_mright_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.628
             ypos 0.53
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("A door leading to another room.") ]
-            clicked [ Play("sound", "audio/objects_falling.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A door leading to another room.") ]
+            clicked [ Play("sound", "audio/objects_falling.flac") ]
             
         imagebutton auto "violet/date_2/v_bench_back_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.926
             ypos 0.568
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Rows of seats with a suspicious yellow liquid\non them. Does Violet pee on them?!") ]
-            clicked [ Play("sound", "audio/rotting_seats.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Rows of seats with a suspicious yellow liquid\non them. Does Violet pee on them?!") ]
+            clicked [ Play("sound", "audio/rotting_seats.flac") ]
             
         
         imagebutton auto "violet/date_2/v_bench_front_%s.png":
@@ -374,8 +460,8 @@ label date_violet_2_pc:
             yanchor 0.5
             xpos 0.681
             ypos 0.85
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Rows of seats with a suspucious yellow liquid\non them. Does Violet pee on them?!") ]
-            clicked [ Play("sound", "audio/rotting_seats.tgm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Rows of seats with a suspucious yellow liquid\non them. Does Violet pee on them?!") ]
+            clicked [ Play("sound", "audio/rotting_seats.flac") ]
         
         
         imagebutton auto "violet/date_2/violet_click_cinema_%s.png":
@@ -383,12 +469,12 @@ label date_violet_2_pc:
             yanchor 0.5
             xpos 0.8
             ypos 0.452
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Violet: Having fun exploring? Sorry about the\nsmell, I use this place for alone time. It's a very\nnice sense of freedom and risk.") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Violet: Having fun exploring? Sorry about the\nsmell, I use this place for alone time. It's a very\nnice sense of freedom and risk.") ]
             action Jump("date_violet_2")
             
-        text tooltip.value:
-            xpos 0.16
-            ypos 0.15
+        text tooltip.value outlines [(2, "#fff")]:
+            xpos 0.1
+            ypos 0.1
     return
 return
 
@@ -398,7 +484,7 @@ label date_violet_2:
     
     pause 3.0
    
-    play music "audio/violet_theme_c.tgm" loop fadein 3.0
+    play music "audio/violet_theme_c.flac" loop fadein 3.0
     
     scene v_abandoned_cinema
     with dissolve
@@ -582,24 +668,26 @@ label date_violet_2:
                             $ renpy.block_rollback()
                             
                             v "Okay, that's fine by me [violet_name]."
+                            
+                            show violet underwear_happy at center with dissolve
+                            
+                            v "Emptied your bladder? Pee boy."
             
                         "I guess I'll just do it on you.":
                             pv "I guess I'll just do it on you."
                             
                             $ renpy.block_rollback()
             
-                            v "Nice, let me get undressed first."
-                            
-                            scene black
-                            with dissolve
-                    
-                            v "Okay, I'm ready [violet_name]!"
-                    
-                            n "You... uh... what the fuck? Violet is drenched now."
+                            v "You need to purchase the full game before you can pee on me. https://windowslogic.itch.io/town-girls"
                             
                             $ achievement.grant("defecation")
                             
-                            jump violet_fail_date
+                            if time == 3:
+                                $ time -= 2
+                            else:
+                                $ time += 1
+                            
+                            jump main_hub_screen
             
         "Take off your clothes.":
         
@@ -634,47 +722,47 @@ label date_violet_2:
     
     $ tooltip = Tooltip("")
     
-    $ renpy.block_rollback()
-    
     call screen first_question with dissolve
     
     screen first_question:
         
-        image "guitar":
+        image "violet/date_2/guitar.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.5
             ypos 0.5
         
-        imagebutton auto "guitar_option_a_%s":
+        imagebutton auto "violet/date_2/guitar_option_a_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.7
             ypos 0.735
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("35") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("35") ]
             action Jump("question_incorrect")
             
-        imagebutton auto "guitar_option_b_%s":
+        imagebutton auto "violet/date_2/guitar_option_b_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.75
             ypos 0.77
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("22") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("22") ]
             action Jump("first_question_correct")
             
-        imagebutton auto "guitar_option_c_%s":
+        imagebutton auto "violet/date_2/guitar_option_c_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.65
             ypos 0.795
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("16") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("16") ]
             action Jump("question_incorrect")
         
-        text tooltip.value:
+        text tooltip.value outlines [(2, "#fff")]:
             xpos 0.65
             ypos 0.64
             
     label first_question_correct:
+        
+        $ renpy.block_rollback()
         
         show violet underwear_happy at center with dissolve
         
@@ -690,49 +778,49 @@ label date_violet_2:
     
     $ tooltip = Tooltip("")
     
-    $ renpy.block_rollback()
-    
     v "What's my ClopPad username?"
     
     call screen second_question with dissolve
     
     screen second_question:
         
-        image "guitar":
+        image "violet/date_2/guitar.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.5
             ypos 0.5
         
-        imagebutton auto "guitar_option_a_%s":
+        imagebutton auto "violet/date_2/guitar_option_a_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.7
             ypos 0.735
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("V10let_F0x") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("V10let_F0x") ]
             action Jump("question_incorrect")
             
-        imagebutton auto "guitar_option_b_%s":
+        imagebutton auto "violet/date_2/guitar_option_b_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.75
             ypos 0.77
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("S3xqt_vio") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("S3xqt_vio") ]
             action Jump("question_incorrect")
             
-        imagebutton auto "guitar_option_c_%s":
+        imagebutton auto "violet/date_2/guitar_option_c_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.65
             ypos 0.795
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("satansqt_vi0") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("satansqt_vi0") ]
             action Jump("second_question_correct")
         
-        text tooltip.value:
+        text tooltip.value outlines [(2, "#fff")]:
             xpos 0.65
             ypos 0.64
         
     label second_question_correct:
+    
+        $ renpy.block_rollback()
         
         show violet underwear_happy at center with dissolve
         
@@ -750,49 +838,49 @@ label date_violet_2:
     
     $ tooltip = Tooltip("")
     
-    $ renpy.block_rollback()
-    
     v "Which information about me is correct?"
     
     call screen third_question with dissolve
     
     screen third_question:
         
-        image "guitar":
+        image "violet/date_2/guitar.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.5
             ypos 0.5
         
-        imagebutton auto "guitar_option_a_%s":
+        imagebutton auto "violet/date_2/guitar_option_a_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.7
             ypos 0.735
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Satanist, guitarist, sexually outgoing") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Satanist, guitarist, sexually outgoing") ]
             action Jump("third_question_correct")
             
-        imagebutton auto "guitar_option_b_%s":
+        imagebutton auto "violet/date_2/guitar_option_b_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.75
             ypos 0.77
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Satanist, drummer, sexual deviant") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Satanist, drummer, sexual deviant") ]
             action Jump("question_incorrect")
             
-        imagebutton auto "guitar_option_c_%s":
+        imagebutton auto "violet/date_2/guitar_option_c_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.65
             ypos 0.795
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Christian, socialist, book worm") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Christian, socialist, book worm") ]
             action Jump("question_incorrect")
         
-        text tooltip.value:
+        text tooltip.value outlines [(2, "#fff")]:
             xpos 0.65
             ypos 0.64
     
     label third_question_correct:
+    
+        $ renpy.block_rollback()
     
         show violet underwear_happy at center with dissolve
         
@@ -810,8 +898,6 @@ label date_violet_2:
     
     $ tooltip = Tooltip("")
     
-    $ renpy.block_rollback()
-    
     v "I'm going to ask you some music-related questions now, be prepared."
     
     v "How many neutral notes are in an octave?"
@@ -820,41 +906,43 @@ label date_violet_2:
     
     screen fourth_question:
         
-        image "guitar":
+        image "violet/date_2/guitar.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.5
             ypos 0.5
         
-        imagebutton auto "guitar_option_a_%s":
+        imagebutton auto "violet/date_2/guitar_option_a_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.7
             ypos 0.735
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("5 notes") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("5 notes") ]
             action Jump("question_incorrect")
             
-        imagebutton auto "guitar_option_b_%s":
+        imagebutton auto "violet/date_2/guitar_option_b_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.75
             ypos 0.77
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("7 notes") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("7 notes") ]
             action Jump("fourth_question_correct")
             
-        imagebutton auto "guitar_option_c_%s":
+        imagebutton auto "violet/date_2/guitar_option_c_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.65
             ypos 0.795
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("8 notes") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("8 notes") ]
             action Jump("question_incorrect")
         
-        text tooltip.value:
+        text tooltip.value outlines [(2, "#fff")]:
             xpos 0.65
             ypos 0.64
         
     label fourth_question_correct:
+        
+        $ renpy.block_rollback()
         
         show violet underwear_happy at center with dissolve
         
@@ -872,50 +960,50 @@ label date_violet_2:
     
     $ tooltip = Tooltip("")
     
-    $ renpy.block_rollback()
-    
     v "How many beats are in the first bar of Vivaldi's 'Autumn' from 'The Four Seasons'?"
     
     call screen fifth_question with dissolve
     
     screen fifth_question:
         
-        image "guitar":
+        image "violet/date_2/guitar.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.5
             ypos 0.5
         
-        imagebutton auto "guitar_option_a_%s":
+        imagebutton auto "violet/date_2/guitar_option_a_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.7
             ypos 0.735
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("3 beats") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("3 beats") ]
             action Jump("fifth_question_correct")
             
-        imagebutton auto "guitar_option_b_%s":
+        imagebutton auto "violet/date_2/guitar_option_b_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.75
             ypos 0.77
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("4 beats") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("4 beats") ]
             action Jump("question_incorrect")
             
-        imagebutton auto "guitar_option_c_%s":
+        imagebutton auto "violet/date_2/guitar_option_c_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.65
             ypos 0.795
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("8 beats") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("8 beats") ]
             action Jump("question_incorrect")
         
-        text tooltip.value:
+        text tooltip.value outlines [(2, "#fff")]:
             xpos 0.65
             ypos 0.64
         
     label fifth_question_correct:
     
+        $ renpy.block_rollback()
+        
         show violet underwear_happy at center with dissolve
         
         v "Did you really get that one first try?"
@@ -940,41 +1028,43 @@ label date_violet_2:
     
     screen sixth_question:
         
-        image "guitar":
+        image "violet/date_2/guitar.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.5
             ypos 0.5
         
-        imagebutton auto "guitar_option_a_%s":
+        imagebutton auto "violet/date_2/guitar_option_a_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.7
             ypos 0.735
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("E") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("E") ]
             action Jump("question_incorrect")
             
-        imagebutton auto "guitar_option_b_%s":
+        imagebutton auto "violet/date_2/guitar_option_b_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.75
             ypos 0.77
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("C") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("C") ]
             action Jump("question_incorrect")
             
-        imagebutton auto "guitar_option_c_%s":
+        imagebutton auto "violet/date_2/guitar_option_c_%s.png":
             xanchor 0.5
             yanchor 0.5
             xpos 0.65
             ypos 0.795
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("D/F#") ]
+            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("D/F#") ]
             action Jump("sixth_question_correct")
         
-        text tooltip.value:
+        text tooltip.value outlines [(2, "#fff")]:
             xpos 0.65
             ypos 0.64
         
     label sixth_question_correct:
+        
+        $ renpy.block_rollback()
         
         show violet underwear_happy at center with dissolve
         
@@ -999,985 +1089,15 @@ label date_violet_2:
     return
 return
 
-# Violet "final" date for boy.
-
-label date_violet_sex_letter:
-
-    n "Purchase the full game to access the saucy content here: https://store.steampowered.com/app/2212600/Town_Girls/"
-    
-    jump main_hub_screen
-    
-    $ v_wet = 0
-
-    scene black
-    with dissolve
-    
-    play audio "audio/door_knock.flac"
-    
-    n "You hear a knock on the door, so you go downstairs and check."
-    
-    n "It's the mail, and there's a letter for you from Violet."
-    
-    play audio "audio/letter.flac"
-    
-    call screen violet_letter with dissolve
-    
-    screen violet_letter:
-        
-        imagebutton idle "violet_date_3_postcard":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.285
-            ypos 0.5
-            action Jump("date_violet_sex_pc")
-        
-        imagebutton idle "violet_date_3_pic":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.78
-            ypos 0.5
-            action Jump("date_violet_sex_pc")
-    return
-return
-
-label date_violet_sex_pc:
-    
-    n "You get ready and make your way to Violet's house."
-    
-    $ tooltip = Tooltip("")
-    
-    stop music fadeout 3.0
-    
-    pause 3.0
-    
-    scene v_house_front_sex
-    with dissolve
-    
-    play music "audio/nature.flac" loop fadein 3.0
-    
-    n "You arrive at Violet's house. There's no one outside and the garage is closed. Is anyone home?"
-    
-    scene v_house_front_sex
-    with dissolve
-    
-    call screen date_violet_sex_objects with dissolve
-
-    screen date_violet_sex_objects:
-        
-        imagebutton auto "v_door_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.637
-            ypos 0.405
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Violet's deep blue front door.") ]
-            action Jump("date_violet_sex")
-            
-        imagebutton auto "v_gdoor_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.364
-            ypos 0.364
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Violet's garage - It's normally open, but\nnot today?") ]
-            clicked [ Play("sound", "audio/garage.flac") ]
-            
-        imagebutton auto "tree_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.864
-            ypos 0.337
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("I'd still like to be a tree.") ]
-            clicked [ Play("sound", "audio/tree.flac") ]
-            
-        if window_crack_v == 0:
-            imagebutton auto "v_window_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.053
-                ypos 0.351
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A window of Violet's house.") ]
-                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("A small crack appeared."), SetVariable("window_crack_v", 1) ]
-        elif window_crack_v == 1:
-            imagebutton auto "v_window_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.053
-                ypos 0.351
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A small crack appeared.") ]
-                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("Another small crack appeared."), SetVariable("window_crack_v", 2) ]
-        elif window_crack_v == 2:
-            imagebutton auto "v_window_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.053
-                ypos 0.351
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Another small crack appeared.") ]
-                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("A bigger crack appeared."), SetVariable("window_crack_v", 3) ]
-        elif window_crack_v == 3:
-            imagebutton auto "v_window_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.053
-                ypos 0.351
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A bigger crack appeared.") ]
-                clicked [ Play("sound", "audio/glass_break.flac"), tooltip.Action("You broke the window."), SetVariable("window_crack_v", 4) ]
-                
-        else:
-        
-            imagebutton idle "v_window_crack_ved":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.053
-                ypos 0.351
-                hovered [ tooltip.Action("You broke the window.") ]
-                action tooltip.Action("You broke the window.")
-        
-        if window_crack_v == 4:
-            $ achievement.grant("window")
-            $ achievement.grant("windowfetish")
-            
-        text tooltip.value:
-            xpos 0.21
-            ypos 0.75
-    return
-return
+# Violet "final" date.
 
 label date_violet_sex:
-    
-    $ tooltip = Tooltip("")
-    
-    play audio "audio/door_open.flac"
-    
-    scene v_house_front_sex_od
-    with dissolve
-    
-    v "Hey [violet_name], I'm glad you made it! Please, come inside."
-    
-    scene v_inside_1
-    with dissolve
-    
-    stop music fadeout 3.0
-    
-    show violet underwear_happy at center with dissolve
-    
-    v "I'm gonna head upstairs to get ready for our night of fun. Just come in my room when you're ready cutie."
-    
-    hide violet underwear_happy with dissolve
-    
-    jump date_violet_sex_hall
-return
 
-label date_violet_sex_hall:
-
-    scene v_inside_1
-    with dissolve
+    label date_violet_sex_letter:
+        n "Hold up! You need to purchase the full game to see Violet's rockstar pussy: https://windowslogic.itch.io/town-girls"
     
-    call screen date_violet_boy_inside_objects with dissolve
-
-    screen date_violet_boy_inside_objects:
-        
-        imagebutton auto "v_inside_door_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.438
-            ypos 0.31
-            hovered [ Play("audio", "audio/door_open.flac"), tooltip.Action("Go into the storage room.") ]
-            action Jump("date_violet_sex_storage")
-            
-        imagebutton auto "v_inside_stairs_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.859
-            ypos 0.395
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Go upstairs.") ]
-            action Jump("date_violet_sex_landing")
-            
-        imagebutton auto "v_inside_pictures_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.6575
-            ypos 0.238
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A picture of what appears to be Violet's parent's wedding\nand a generic picture of a flower.") ]
-            clicked [ Play("sound", "audio/wedding.flac") ]
-            
-        imagebutton auto "v_inside_cupboard_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.75
-            ypos 0.46
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("An understair cupboard - I wonder what's inside?") ]
-            clicked [ Play("sound", "audio/boing.flac") ]
-            
-        text tooltip.value:
-            xpos 0.21
-            ypos 0.75
+        jump main_hub_screen
     return
-return
-
-label date_violet_sex_storage:
-
-    scene v_inside_2
-    with dissolve
-
-    call screen date_violet_boy_inside_storage with dissolve
-
-    screen date_violet_boy_inside_storage:
-        
-        imagebutton auto "v_inside_boxes_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.54
-            ypos 0.5775
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Massive boxes full of various sex toys.") ]
-            clicked [ Play("sound", "audio/boxes.flac") ]
-            
-        imagebutton auto "down_arrow_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.3
-            ypos 0.9681
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Go back to the hall.") ]
-            action Jump("date_violet_sex_hall")
-            
-        imagebutton auto "left_arrow_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.0179
-            ypos 0.4
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Go into the kitchen.") ]
-            action Jump("date_violet_sex_kitchen")
-            
-        text tooltip.value:
-            xpos 0.1
-            ypos 0.8
-    return
-return
-
-label date_violet_sex_kitchen:
-    
-    scene v_inside_3
-    with dissolve
-
-    call screen date_violet_boy_inside_kitchen with dissolve
-
-    screen date_violet_boy_inside_kitchen:
-        
-        imagebutton auto "v_inside_sink_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.955
-            ypos 0.6
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A typical kitchen sink.") ]
-            action Jump("sink_dialogue")
-            
-        imagebutton auto "v_inside_kettle_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.719
-            ypos 0.491
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Your pretty average electric kettle.") ]
-            clicked [ Play("audio", "audio/kettle.flac") ]
-            
-        imagebutton auto "v_inside_tea_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.483
-            ypos 0.528
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A pot for storing tea bags.") ]
-            clicked [ Play("audio", "audio/ding.flac") ]
-            
-        imagebutton auto "v_inside_sugar_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.539
-            ypos 0.528
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A pot for storing sugar.") ]
-            clicked [ Play("audio", "audio/ding_c.flac") ]
-            
-        imagebutton auto "v_inside_cupboards_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.662
-            ypos 0.712
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Kitchen cupboards for storing kitchen stuff.") ]
-            clicked [ Play("audio", "audio/boing.flac") ]
-            
-        imagebutton auto "v_inside_coffee_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.595
-            ypos 0.528
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A pot for storing coffee.") ]
-            clicked [ Play("audio", "audio/ding_a.flac") ]
-            
-        imagebutton auto "down_arrow_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.3
-            ypos 0.9681
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Go back to storage.") ]
-            action Jump("date_violet_sex_storage")
-            
-        imagebutton auto "v_inside_kdoor_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.181
-            ypos 0.419
-            hovered [ Play("audio", "audio/door_open.flac"), tooltip.Action("Go into the dining room.") ]
-            action Jump("date_violet_sex_dining")
-            
-        text tooltip.value:
-            xpos 0.1
-            ypos 0.86
-    return
-    
-    label sink_dialogue:
-    
-    "The sink is too clean. Pee in it?"
-    
-    menu:
-        "Sure, I needed to go anyway.":
-            play audio "audio/peeing.flac"
-            
-            $ achievement.grant("sinkpee")
-            
-            if gender == 0:
-                "You stand over the sink and fill it up with yellow liquid."
-            elif gender == 1:
-                "You sit over the sink and fill it up with yellow liquid."
-            jump date_violet_sex_kitchen
-            
-            pause 15.0
-            
-        "Ew, no that's disgusting.":
-            
-            $ achievement.grant("nosinkpee")
-            
-            jump date_violet_sex_kitchen
-    return
-return
-
-label date_violet_sex_dining:
-
-    scene v_inside_4
-    with dissolve
-
-    call screen date_violet_boy_inside_dining with dissolve
-
-    screen date_violet_boy_inside_dining:
-        
-        imagebutton auto "v_inside_dpic_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.709
-            ypos 0.198
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A generic picture of a mountain field.") ]
-            clicked [ Play("audio", "audio/nature.flac") ]
-        
-        if vase == 0:
-            imagebutton auto "v_inside_vase_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.52
-                ypos 0.491
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A glass vase with a fake potted plant inside.") ]
-                clicked [ Play("audio", "audio/glass_break.flac"), SetVariable("vase", 1), tooltip.Action("You pushed the vase off the table.") ]
-        else:
-            imagebutton idle "debug"
-        
-        imagebutton auto "left_arrow_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.0179
-            ypos 0.4
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Go into the lounge.") ]
-            action Jump("date_violet_sex_lounge")
-        
-        imagebutton auto "down_arrow_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.2
-            ypos 0.9681
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Go back to the kitchen.") ]
-            action Jump("date_violet_sex_kitchen")
-            
-        text tooltip.value:
-            xpos 0.1
-            ypos 0.1
-    return
-return
-
-label date_violet_sex_lounge:
-
-    scene v_inside_5
-    with dissolve
-
-    call screen date_violet_boy_inside_lounge with dissolve
-
-    screen date_violet_boy_inside_lounge:
-        
-        imagebutton auto "v_inside_tv_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.645
-            ypos 0.445
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Quite an old flat screen television.") ]
-            clicked [ Play("audio", "audio/tv.flac") ]
-        
-        if window_crack_v == 0:
-            imagebutton auto "v_inside_window_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.316
-                ypos 0.333
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("The lounge window.") ]
-                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("A small crack appeared."), SetVariable("window_crack_v", 1) ]
-        elif window_crack_v == 1:
-            imagebutton auto "v_inside_window_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.316
-                ypos 0.333
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A small crack appeared.") ]
-                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("Another small crack appeared."), SetVariable("window_crack_v", 2) ]
-        elif window_crack_v == 2:
-            imagebutton auto "v_inside_window_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.316
-                ypos 0.333
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Another small crack appeared.") ]
-                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("A bigger crack appeared."), SetVariable("window_crack_v", 3) ]
-        elif window_crack_v == 3:
-            imagebutton auto "v_inside_window_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.316
-                ypos 0.333
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A bigger crack appeared.") ]
-                clicked [ Play("sound", "audio/glass_break.flac"), tooltip.Action("You broke the window."), SetVariable("window_crack_v", 4) ]
-        else:
-            imagebutton idle "v_inside_bwindow":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.316
-                ypos 0.333
-                hovered [ tooltip.Action("You broke the window.") ]
-                action tooltip.Action("You broke the window.")
-        
-        imagebutton auto "down_arrow_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.2
-            ypos 0.9681
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Go back to the dining room.") ]
-            action Jump("date_violet_sex_dining")
-            
-        text tooltip.value:
-            xpos 0.1
-            ypos 0.7
-    return
-return
-
-label date_violet_sex_landing:
-
-    play audio "audio/stairs.flac"
-    
-    scene v_inside_6
-    with dissolve
-
-    call screen date_violet_boy_inside_landing with dissolve
-
-    screen date_violet_boy_inside_landing:
-        
-        imagebutton auto "v_inside_vdoor_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.829
-            ypos 0.48
-            hovered [ Play("audio", "audio/door_open.flac"), tooltip.Action("Violet's bedroom; it smells like her scent.") ]
-            action Jump("date_violet_sex_room")
-            
-        imagebutton auto "v_inside_ldoor_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.315
-            ypos 0.255
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Looks to be another bedroom, but the door is locked.") ]
-            clicked [ Play("audio", "audio/parents_sex.flac") ]
-        
-        imagebutton auto "down_arrow_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.2
-            ypos 0.9681
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Go back downstairs.") ]
-            action Jump("date_violet_sex_hall")
-            
-        text tooltip.value:
-            xpos 0.1
-            ypos 0.7
-    return
-    
-return
-
-label date_violet_sex_room:
-    
-    scene v_inside_7
-    with dissolve
-
-    call screen date_violet_boy_inside_room with dissolve
-
-    screen date_violet_boy_inside_room:
-    
-        imagebutton auto "v_inside_bed_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.735
-            ypos 0.64
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Violet's bed. There's boxes underneath full of various sex toys, such as, dildos, fuzzy cuffs and vibrators.") ]
-            clicked [ Play("audio", "audio/boing.flac") ]
-    
-        imagebutton auto "v_inside_chair_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.33
-            ypos 0.6
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Violet's desk chair. It looks like its seen her cum more than a few times.") ]
-            clicked [ Play("audio", "audio/boing.flac") ]
-    
-        imagebutton auto "v_inside_pc_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.13
-            ypos 0.34
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Violet's computer. There's a lot of porn on the desktop.") ]
-            clicked [ Play("audio", "audio/computer.flac") ]
-            
-        imagebutton auto "v_inside_desk_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.11
-            ypos 0.624
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Violet's desk. In the draw, there's a rainbow dildo, lube and some tampons.") ]
-            clicked [ Play("audio", "audio/boing.flac") ]
-        
-        imagebutton auto "v_inside_mirror_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.052
-            ypos 0.64
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Violet's mirror. So that's how she gets those decent pics.") ]
-            clicked [ Play("audio", "audio/boing.flac") ]
-        
-        imagebutton auto "down_arrow_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.2
-            ypos 0.9681
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Go back to the landing.") ]
-            action Jump("date_violet_sex_landing")
-            
-        imagebutton auto "v_click_uw_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.6
-            ypos 0.55
-            hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Hey cutie, when you wanna get dirty?") ]
-            action Jump("date_violet_sex_start")
-            
-        text tooltip.value:
-            xpos 0.05
-            ypos 0.02
-    return
-return
-
-label date_violet_sex_start:
-
-    scene v_inside_sex
-    with dissolve
-
-    play music "audio/violet_theme.flac" loop fadein 3.0
-    
-    show violet underwear at center with dissolve
-    
-    v "Do you like my room? I decorated it myself a few years ago."
-    
-    menu:
-        "It's really cool!":
-            pv "It's really cool!"
-            
-            show violet underwear_happy at center with dissolve
-            
-            v "Thank you, you're so kind."
-            
-        "Black and red? Seriously? Are you 12?":
-            pv "Black and red? Seriously? Are you 12?"
-            
-            jump violet_fail_date
-    
-    v "I want to reward you with something special because you've been a great partner these last few months."
-    
-    menu:
-        "What did you want to give to me?":
-            pv "What did you want to give to me?"
-            
-            show violet underwear_happy at center with dissolve
-            
-            v "As a thank you, I wanted to give you full access to my body so you can do whatever you want to me."
-            
-        "Thanks, it's the least I could do.":
-            pv "Thanks, it's the least I could do."
-            
-            show violet underwear_happy at center with dissolve
-            
-            v "No, thank you for not being a creep and actually listening to me for once. Other people don't give a shit about me."
-    
-    v "I think you should take my panties off first, cutie. I really want to show my pussy."
-    
-    hide violet underwear_happy at center with dissolve
-    
-    jump take_off_1
-return
-
-label take_off_1:
-
-    show violetmg at center
-    
-    call screen take_off_1
-    
-    $ renpy.block_rollback()
-    
-    if droppable == "Drag Space":
-        $ xpos_var = 150
-    else:
-        $ xpos_var = 640
-    if draggable == "wrong_answer_1":
-    
-        hide violetmg at center
-        show violetboobsangry at center with dissolve
-        v "Gah! You weren't supposed to take that off yet, pervert! Wait until I tell you to!"
-        jump violet_fail_date
-        
-    elif draggable == "right_answer":
-    
-        hide violetmg at center
-        show violet vagina_happy at center with dissolve
-        v "Hehe! Like the look of my pussy between my legs?"
-        jump take_off_2
-    
-    screen take_off_1:
-        
-        draggroup:
-            drag:
-                drag_name "wrong_answer_1"
-                xpos 0.458
-                ypos 0.295
-                draggable True
-                droppable False
-                dragged drag_placed
-                drag_raise True
-                image "violetbra"
-                    
-            drag:
-                drag_name "right_answer"
-                xpos 0.429
-                ypos 0.625
-                draggable True
-                droppable False
-                dragged drag_placed
-                drag_raise True
-                image "violetpanties"
-            drag:
-                drag_name "Drag Space"
-                xpos 0.7
-                ypos 0.33
-                child "tub"
-                draggable False
-                droppable True
-                
-        image "violetmgarm":
-            xpos 0.4
-            ypos 0.365
-    return
-return
-
-label take_off_2:
-
-    hide violet vagina_happy
-    
-    show violetmg at center
-    
-    call screen take_off_2
-    
-    $ renpy.block_rollback()
-    
-    if droppable == "Drag Space":
-        $ xpos_var = 150
-    else:
-        $ xpos_var = 640
-    if draggable == "right_answer":
-        
-        hide violetmg at center
-        show violet naked at center with dissolve
-        v "Thank you for undressing me. I'll get comfortable on the bed now."
-        jump violet_date_sex_play
-    elif draggable == "wrong_answer_1":
-        ""
-        
-    screen take_off_2:
-        
-        draggroup:
-            drag:
-                drag_name "right_answer"
-                xpos 0.458
-                ypos 0.295
-                draggable True
-                droppable False
-                dragged drag_placed
-                drag_raise True
-                image "violetbra"
-                    
-            drag:
-                drag_name "wrong_answer_1"
-                xpos 0.429
-                ypos 0.625
-                draggable True
-                droppable False
-                dragged drag_placed
-                drag_raise True
-                image "debug"
-            drag:
-                drag_name "Drag Space"
-                xpos 0.7
-                ypos 0.33
-                child "tub"
-                draggable False
-                droppable True
-                
-        image "violetmgarm":
-            xpos 0.4
-            ypos 0.365
-    return
-return
-
-label violet_date_sex_play:
-
-    if v_wet == 0:
-        scene v_inside_play_1
-        with dissolve
-    elif v_wet == 1:
-        scene v_inside_play_1a
-        with dissolve
-    
-    v "You can either play with me first or go straight into making love. It's your choice, hun."
-    
-    if gender == 0:
-        call screen date_violet_boy_inside_sex_play with dissolve
-
-        screen date_violet_boy_inside_sex_play:
-    
-            imagebutton auto "pp_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.9
-                ypos 0.85
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Use Violet's rainbow dildo on her.") ]
-                action Jump("violet_date_sex_dildo")
-    
-            imagebutton auto "finger_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.9
-                ypos 0.6
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Finger Violet until she's wet.") ]
-                action Jump("violet_date_sex_finger")
-    
-            imagebutton auto "sex_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.9
-                ypos 0.4
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Commit sexual intercourse with Violet.") ]
-                action Jump("violet_date_sex_intercourse")
-            
-            text tooltip.value:
-                xpos 0.05
-                ypos 0.1
-        return
-    
-    elif gender == 1:
-        call screen date_violet_girl_inside_sex_play with dissolve
-
-        screen date_violet_girl_inside_sex_play:
-    
-            imagebutton auto "pp_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.9
-                ypos 0.85
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Use Violet's rainbow dildo on her.") ]
-                action Jump("violet_date_sex_dildo")
-    
-            imagebutton auto "finger_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.9
-                ypos 0.4
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Commit sexual intercourse with Violet.") ]
-                action Jump("violet_date_sex_intercourse")
-            
-            text tooltip.value:
-                xpos 0.05
-                ypos 0.1
-        return
-return
-
-label violet_date_sex_finger:
-
-    scene v_inside_play_2
-    with dissolve
-    
-    $ v_wet = 1
-    
-    v "Yes... I can feel your fingers touching my g-spot..."
-    
-    jump violet_date_sex_play
-return
-
-label violet_date_sex_dildo:
-
-    scene v_inside_play_3
-    with dissolve
-    
-    $ v_wet = 1
-    
-    v "Ahhh... It feels so good..."
-    
-    jump violet_date_sex_play
-return
-
-label violet_date_sex_intercourse:
-
-    scene blank
-    with dissolve
-    
-    stop music fadeout 3.0
-    
-    if gender == 0:
-        n "You slowly insert your penis into Violet's tight fox pussy..."
-    
-        n "She moans with happiness as you move up and down inside her..."
-    elif gender == 1:
-        n "You slowly insert your fingers into Violet's tight fox pussy..."
-    
-        n "She moans with happiness as you move up and down inside her..."
-    
-    play music "audio/violet_sex.flac"
-    
-    pause 39.0
-    
-    stop music fadeout 3.0
-    
-    pause 3.0
-    
-    jump violet_date_sex_success
-return
-
-label violet_date_sex_success:
-    
-    play music "audio/violet_theme.flac" fadein 3.0
-
-    if gender == 0:
-        scene v_inside_cum
-        with dissolve
-    if gender == 1:
-        $ v_wet = 1
-        scene v_inside_play_2
-        with dissolve
-    
-    v "Oh my God... That felt so good... I needed that so badly... Thank you..."
-    
-    menu:
-        "How about another round?":
-            
-            pv "How about another round?"
-            
-            v "Only this once, cutie."
-            
-            scene blank
-            with dissolve
-    
-            stop music fadeout 3.0
-            
-            if gender == 0:
-                
-                $ achievement.grant("balls")
-                
-                n "You insert your penis back into Violet's opened hole..."
-    
-                n "She again, moans with happiness as you move up and down inside her..."
-            elif gender == 1:
-            
-                $ achievement.grant("ironfingers")
-                
-                n "You insert your fingers back into Violet's opened hole..."
-    
-                n "She again, moans with happiness as you move them up and down inside her..."
-    
-            play music "audio/violet_sex.flac"
-    
-            pause 39.0
-    
-            stop music fadeout 3.0
-    
-            pause 3.0
-            
-            play music "audio/violet_theme.flac" fadein 3.0
-           
-        "Doing you felt amazing.":
-            pv "Doing you felt amazing."
-            
-    if gender == 0:
-        scene v_inside_cum
-        with dissolve
-    if gender == 1:
-        $ v_wet = 1
-        scene v_inside_play_2
-        with dissolve
-            
-    if gender == 0:
-        v "Wait... Did you cum in me?"
-    
-        v "Were you even wearing protection...?"
-    
-        v "I'm not on contraception..."
-    
-        v "..."
-    elif gender == 1:
-        v "I think I came."
-        
-        v "Your fingers felt so amazing inside me."
-    
-    $ renpy.block_rollback()
-    
-    stop music fadeout 3.0
-        
-    play audio "audio/date_success.flac"
-    n "Date Success!"
-    
-    scene blank
-    with dissolve
-    
-    if gender == 0:
-        n "You might have made Violet pregnant and took her panties."
-    elif gender == 1:
-        n "You took Violet's panties."
-        
-    $ achievement.grant("violet_3_success")
-    
-    $ dating += 1
-    $ violet += 1
-    jump main_hub_screen
 return
 
 # Violet fail date.
@@ -1997,8 +1117,13 @@ label violet_fail_date:
         
     v "It seems we're not a great match for each other [violet_name]. I think we should see other people. I'm sorry."
         
-    play audio "audio/date_fail.tgm"
+    play audio "audio/date_fail.flac"
     n "Date failed..."
+    
+    if time == 3:
+        $ time -= 2
+    else:
+        $ time += 1
         
     jump main_hub_screen     
 return
@@ -2012,13 +1137,13 @@ label violet_succeed_date:
         elif gender == 1:
             v "Here's a picture of me so you can finger yourself to it or something."
     
-        play audio "audio/date_success.tgm"
+        play audio "audio/date_success.flac"
         n "Date Success!"
     
         hide violet happy with dissolve
     
         scene blank
-        with dissolve
+        with irisin
     
         stop music fadeout 3.0
     
@@ -2028,11 +1153,11 @@ label violet_succeed_date:
     
         $ achievement.grant("violet_1_success")
     
-        call screen violet_pic_1 with dissolve
+        call screen violet_pic_1 with irisout
     
         screen violet_pic_1:
         
-            imagebutton idle "violet_date_1_pic":
+            imagebutton idle "violet/date_1/violet_date_1_pic.png":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.5
@@ -2051,13 +1176,13 @@ label violet_succeed_date:
         elif gender == 1:
             v "Here's a picture of me so you can finger yourself to me more."
         
-        play audio "audio/date_success.tgm"
+        play audio "audio/date_success.flac"
         n "Date Success!"
         
         hide violet underwear_happy with dissolve
         
         scene blank
-        with dissolve
+        with irisin
     
         stop music fadeout 3.0
         
@@ -2067,11 +1192,11 @@ label violet_succeed_date:
         
         $ achievement.grant("violet_2_success")
         
-        call screen violet_pic_2 with dissolve
+        call screen violet_pic_2 with irisout
     
         screen violet_pic_2:
         
-            imagebutton idle "violet_date_2_pic":
+            imagebutton idle "violet/date_2/violet_date_2_pic.png":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.5
@@ -2079,67 +1204,30 @@ label violet_succeed_date:
                 action Jump("v_variable_update")
         return
     elif violet == 3:    
-        play music "audio/violet_theme.tgm" fadein 3.0
+        play music "audio/violet_theme.flac" fadein 3.0
 
         if gender == 0:
-            scene v_inside_cum
+            scene v_sex_scene_cum
             with dissolve
         if gender == 1:
             $ v_wet = 1
-            scene v_inside_play_2
+            scene v_sex_scene_squirt
             with dissolve
     
         v "Oh my God... That felt so good... I needed that so badly... Thank you..."
-    
-        menu:
-            "How about another round?":
-            
-                pv "How about another round?"
-            
-                v "Only this once, cutie."
-            
-                scene blank
-                with dissolve
-    
-                stop music fadeout 3.0
-            
-                if gender == 0:
-                
-                    $ achievement.grant("balls")
-                
-                    n "You insert your penis back into Violet's opened hole..."
-    
-                    n "She again, moans with happiness as you move up and down inside her..."
-                elif gender == 1:
-            
-                    $ achievement.grant("ironfingers")
-                
-                    n "You insert your fingers back into Violet's opened hole..."
-    
-                    n "She again, moans with happiness as you move them up and down inside her..."
-    
-                play music "audio/violet_sex.tgm"
-    
-                pause 39.0
-    
-                stop music fadeout 3.0
-    
-                pause 3.0
-            
-                play music "audio/violet_theme.tgm" fadein 3.0
-           
-            "Doing you felt amazing.":
-                pv "Doing you felt amazing."
             
         if gender == 0:
-            scene v_inside_cum
+            scene v_sex_scene_shock_cum
             with dissolve
         if gender == 1:
             $ v_wet = 1
-            scene v_inside_play_2
+            scene v_sex_scene_squirt
             with dissolve
             
         if gender == 0:
+        
+            $ achievement.grant("balls")
+            
             v "Wait... Did you cum in me?"
     
             v "Were you even wearing protection...?"
@@ -2147,16 +1235,19 @@ label violet_succeed_date:
             v "I'm not on contraception..."
     
             v "..."
+            
+            # TODO: Add end scene.
         elif gender == 1:
+            
             v "I think I came."
         
-            v "Your fingers felt so amazing inside me."
+            v "Your pussy felt so amazing while rubbing it on me."
     
         $ renpy.block_rollback()
     
         stop music fadeout 3.0
         
-        play audio "audio/date_success.tgm"
+        play audio "audio/date_success.flac"
         if gender == 0:
             n "Date Success?"
         elif gender == 1:
@@ -2178,6 +1269,11 @@ label violet_succeed_date:
     label v_variable_update:
         $ dating += 1
         $ violet += 1
+        if time == 3:
+            $ time -= 2
+        else:
+            $ time += 1
         jump main_hub_screen
     return    
 return
+

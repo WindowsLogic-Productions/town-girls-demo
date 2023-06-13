@@ -596,7 +596,7 @@ screen about():
             ## gui.about is usually set in options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
-                text "Copyright © 2022 WindowsLogic Productions. All rights reserved."
+                text "Copyright © 2022 - 2023 WindowsLogic Productions. All rights reserved."
 
 
 style about_label is gui_label

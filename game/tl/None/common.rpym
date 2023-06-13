@@ -106,8 +106,8 @@ translate None strings:
     new "Clipboard"
 
     # renpy/common/00accessibility.rpy:209
-    old "Debug"
-    new "Debug"
+    old "debug.png"
+    new "debug.png"
 
     # renpy/common/00accessibility.rpy:215
     old "Self-Voicing Volume Drop"
@@ -586,8 +586,8 @@ translate None strings:
     new "clipboard voicing"
 
     # renpy/common/00preferences.rpy:424
-    old "debug voicing"
-    new "debug voicing"
+    old "debug.png voicing"
+    new "debug.png voicing"
 
     # renpy/common/00preferences.rpy:433
     old "emphasize audio"
@@ -1174,8 +1174,8 @@ translate None strings:
     new "Console"
 
     # renpy/common/_errorhandling.rpym:639
-    old "Opens a console to allow debugging the problem."
-    new "Opens a console to allow debugging the problem."
+    old "Opens a console to allow debug.pngging the problem."
+    new "Opens a console to allow debug.pngging the problem."
 
     # renpy/common/_errorhandling.rpym:652
     old "Quits the game."

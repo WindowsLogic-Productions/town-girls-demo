@@ -1,3 +1,147 @@
+# Amber's opening scene.
+
+label date_amber_opening:
+
+    jump date_amber_timecheck
+return
+
+# Check time of game to determine if dates are possible.
+
+label date_amber_timecheck:
+
+    scene loading
+    with irisout
+    
+    $ _game_menu_screen = None
+    $ quick_menu = False
+
+    if time == 1:
+        if amber == 1:
+            jump date_amber_1_pc
+        elif amber == 2:
+            jump date_amber_2_pc
+        else:
+            jump date_amber_timechecked_working
+    elif time == 2:
+        if amber == 1:
+            jump date_amber_1_pc
+        elif amber == 2:
+            jump date_amber_2_pc
+        else:
+            jump date_amber_timechecked_working
+    else:
+        if amber == 1:
+            jump date_amber_timechecked_asleep
+        elif amber == 2:
+            jump date_amber_timechecked_asleep
+        else:
+            jump date_amber_sex_letter
+return
+
+label date_amber_timechecked_working:
+
+    stop music fadeout 3.0
+    
+    pause 3.0
+    
+    play music "audio/time_advance_ph.flac" loop fadein 3.0
+    
+    pause 3.0
+    
+    scene black
+    with dissolve
+    
+    n "Amber is currently working, do you want to advance time?"
+        
+    menu:
+        "Go to sleep":
+        
+            n "You sleep until it's evening."
+            
+            $ time = 3
+                
+            jump main_hub_screen
+                
+        "Go to the shop Amber works at and stalk her":
+                
+            n "You go to the shop where Amber works to stalk her."
+                
+            $ nightstalk = renpy.random.randint(1, 4)
+                
+            if nightstalk == 1:
+                scene a_working
+                with pixellate
+            elif nightstalk == 2:
+                scene a_working
+                with pixellate
+            elif nightstalk == 3:
+                scene a_working
+                with pixellate
+            else:
+                scene a_working
+                with pixellate
+                
+            $ time = 3
+            
+            stop music fadeout 3.0
+    
+            pause 3.0
+        
+            jump main_hub_screen
+return
+
+label date_amber_timechecked_asleep:
+
+    stop music fadeout 3.0
+    
+    pause 3.0
+    
+    play music "audio/time_advance_ph.flac" loop fadein 3.0
+    
+    pause 3.0
+    
+    scene black
+    with dissolve
+
+    n "Amber is currently sleeping, do you want to advance time?"
+        
+    menu:
+        "Go to sleep":
+            
+            n "You sleep until it's morning."
+                
+            $ time = 1
+                
+            jump main_hub_screen
+                
+        "Go to Amber's house and watch her sleep until morning":
+                
+            n "You go to Amber's house with a ladder. Her bedroom window is open so you position the ladder and climb up to see her sleeping."
+                
+            $ nightstalk = renpy.random.randint(1, 4)
+                
+            if nightstalk == 1:
+                scene a_sleeping
+                with pixellate
+            elif nightstalk == 2:
+                scene a_sleeping
+                with pixellate
+            elif nightstalk == 3:
+                scene a_sleeping
+                with pixellate
+            else:
+                scene a_sleeping
+                with pixellate
+                
+            $ time = 1
+            
+            stop music fadeout 3.0
+    
+            pause 3.0
+        
+            jump main_hub_screen
+return
+
 # Amber first date.
 
 label date_amber_1_pc:
@@ -5,7 +149,7 @@ label date_amber_1_pc:
     $ achievement.grant("first")
     
     scene a_shop_outside
-    with dissolve
+    with irisout
     
     $ tooltip = Tooltip("")
     
@@ -13,13 +157,13 @@ label date_amber_1_pc:
     
     pause 3.0
     
-    play music "audio/rain.tgm" loop fadein 3.0
+    play music "audio/rain.flac" loop fadein 3.0
     
     pause 3.0
     
-    n "You moved in not long ago and need food and drink to sustain yourself, so you decide to go to the local shop to pick up some groceries."
+    n "After a month of stalking the tabby cat, you know exactly when her break hours are, so go to meet her. You want to make it seem like an accident."
     
-    n "You arrive at the shop and notice there’s a girl outside wearing the shop uniform and sucking on a Candy Stick like a cigarette. This feels like the perfect chance to talk to her. Do you approach?"
+    n "You arrive at the shop and notice the tabby cat is outside wearing the shop uniform and sucking on a Candy Stick like a cigarette. This feels like the perfect chance to talk to her. Do you approach?"
     
     label a1_jump_from_collect:
     
@@ -40,32 +184,32 @@ label date_amber_1_pc:
                 yanchor 0.5
                 xpos 0.51
                 ypos 0.432
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("The shop where Amber works.") ]
-                clicked [ Play("sound", "audio/glass_knock.tgm"), tooltip.Action("A small crack appeared in the glass."), SetVariable("window_crack_a", 1) ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("The shop where Amber works.") ]
+                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("A small crack appeared in the glass."), SetVariable("window_crack_a", 1) ]
         elif window_crack_a == 1:
             imagebutton auto "a_shop_body_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.51
                 ypos 0.432
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("A small crack appeared in the glass.") ]
-                clicked [ Play("sound", "audio/glass_knock.tgm"), tooltip.Action("Another small crack appeared in the glass."), SetVariable("window_crack_a", 2) ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A small crack appeared in the glass.") ]
+                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("Another small crack appeared in the glass."), SetVariable("window_crack_a", 2) ]
         elif window_crack_a == 2:
             imagebutton auto "a_shop_body_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.51
                 ypos 0.432
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Another small crack appeared in the glass.") ]
-                clicked [ Play("sound", "audio/glass_knock.tgm"), tooltip.Action("A bigger crack appeared in the glass."), SetVariable("window_crack_a", 3) ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Another small crack appeared in the glass.") ]
+                clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("A bigger crack appeared in the glass."), SetVariable("window_crack_a", 3) ]
         elif window_crack_a == 3:
             imagebutton auto "a_shop_body_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.51
                 ypos 0.432
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("A bigger crack appeared in the glass.") ]
-                clicked [ Play("sound", "audio/glass_break.tgm"), tooltip.Action("You broke the shop's windows."), SetVariable("window_crack_a", 4) ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A bigger crack appeared in the glass.") ]
+                clicked [ Play("sound", "audio/glass_break.flac"), tooltip.Action("You broke the shop's windows."), SetVariable("window_crack_a", 4) ]
         else:
             imagebutton idle "a_shop_body_cracked":
                 xanchor 0.5
@@ -77,14 +221,14 @@ label date_amber_1_pc:
         
         if window_crack_a == 4:
             
-            $ window_cracked +=1
+            $ window_cracked += 1
             
             imagebutton auto "amber_click_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.55
                 ypos 0.55
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Tabby Cat: I hope my boss doesn't think I did this.") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Tabby Cat: I hope my boss doesn't think I did this.") ]
                 action Jump("date_amber_1")
         else:
             imagebutton auto "amber_click_%s":
@@ -92,7 +236,7 @@ label date_amber_1_pc:
                 yanchor 0.5
                 xpos 0.55
                 ypos 0.55
-                hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Tabby Cat: I didn't expect it to be so wet today...") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Tabby Cat: I didn't expect it to be so wet today...") ]
                 action Jump("date_amber_1")
                 
         image "rain":
@@ -101,11 +245,11 @@ label date_amber_1_pc:
             xpos 0.5
             ypos 0.5
             
-        text tooltip.value:
+        text tooltip.value outlines [(2, "#fff")]:
             xpos 0.1
             ypos 0.1
-    return
     
+    return
     return
 
     label a_collect_item_1:
@@ -138,7 +282,7 @@ label date_amber_1:
 
     if window_cracked == 1:
         $ achievement.grant("window")
-    elif window_cracked == 2:
+    else:
         $ achievement.grant("windowfetish")
 
     $ amber_name = ""
@@ -155,7 +299,7 @@ label date_amber_1:
     
     pause 3.0
     
-    play music "audio/amber_theme.tgm" loop fadein 3.0
+    play music "audio/amber_theme.flac" loop fadein 3.0
     
     pause 3.0
     
@@ -185,7 +329,7 @@ label date_amber_1:
     
     $ renpy.block_rollback()
     
-    play audio "audio/remember.tgm"
+    play audio "audio/remember.flac"
     n "Amber will remember that."
     
     show amber giggle at center with dissolve
@@ -325,7 +469,7 @@ label date_amber_1:
             
             a "Thank you, I’m sure you’ll like what you see."
             
-            $ achievement.grant("tabbynudes")
+            $ achievement.grant("lewd")
             
         "Nice, I'll follow you as soon as possible.":
             pa "Nice, I'll follow you as soon as possible."
@@ -334,7 +478,7 @@ label date_amber_1:
             
             a "Thank you, that means a lot. I'm sure you'll like what you see on my profile."
             
-            $ achievement.grant("tabbynudes")
+            $ achievement.grant("lewd")
             
     $ renpy.block_rollback()
     
@@ -349,7 +493,7 @@ label date_amber_1:
         
     $ renpy.block_rollback()
         
-    play audio "audio/remember.tgm" 
+    play audio "audio/remember.flac" 
     n "Amber will remember that."
     
     show amber giggle at center with dissolve
@@ -375,196 +519,52 @@ return
 
 label date_amber_2_pc:
 
-    n "Purchase the full game to access the saucy content here: https://store.steampowered.com/app/2212600/Town_Girls/"
+    n "Hold up! You need to purchase the full game to see Amber's tight pussy: https://windowslogic.itch.io/town-girls"
     
-    scene black
-    with dissolve
-    
-    $ a_wet = 0
-    
-    $ tooltip = Tooltip("")
-    
-    stop music fadeout 3.0
-    
-    pause 3.0
-
-    if window_crack_a == 4:
-        scene a_shop_outside_crack
-        with dissolve
-    else:
-        scene a_shop_outside
-        with dissolve
-    
-    play music "audio/rain.tgm" loop fadein 3.0
-    
-    n "You meet Amber outside the shop she works but she’s not wearing anything on her lower half. Before you can say anything about it, she takes you to the local park."
-    
-    scene black
-    with dissolve
-    
-    n "The park is empty as it’s raining, and you’re still wondering why Amber is not wearing anything on her lower half in the cold, wet rain."
-    
-    label a2_jump_from_collect:
-    
-    scene a_park
-    with dissolve
-    
-    call screen date_amber_2_objects with dissolve
-
-    screen date_amber_2_objects:
-        
-        imagebutton auto "a_park_tree_1_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.818
-            ypos 0.372
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("I like being in parks.") ]
-            action Jump("a_collect_item_2")
-            
-        imagebutton auto "a_park_tree_2_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.179
-            ypos 0.297
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Parks are nice.") ]
-            action Jump("a_collect_item_3")
-            
-        imagebutton auto "a_park_tree_3_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.681
-            ypos 0.473
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("The rain makes me happy.") ]
-            action Jump("a_collect_item_4")
-            
-        imagebutton auto "a_park_tree_4_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.171
-            ypos 0.353
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Do you think the animals can hear us?") ]
-            action Jump("a_collect_item_5")
-        
-        imagebutton auto "a_park_%s":
-            xanchor 0.5
-            yanchor 0.5
-            xpos 0.4
-            ypos 0.5
-            hovered [ Play("audio", "audio/select.tgm"), tooltip.Action("Amber: I- I didn't think my pussy would be this c- cold...") ]
-            action Jump("date_amber_2")
-            
-        text tooltip.value:
-            xpos 0.5
-            ypos 0.005
-            
-    return
-    
-    label a_collect_item_2:
-    
-    if a_item_sap == 1:
-       n "You search the tree again and find nothing."
-    else:
-        
-        scene a_park_blur
-        with dissolve
-        
-        show a_sap at center with dissolve
-        
-        n "You search the tree and find a strange gooey liquid."
-        $ a_item_sap += 1
-        $ a_items += 1
-        
-    jump a2_jump_from_collect
-    
-    return
-    
-    label a_collect_item_3:
-    
-    if a_item_condom == 1:
-       n "You search the tree again and find nothing."
-    else:
-        scene a_park_blur
-        with dissolve
-        
-        show a_condom at center with dissolve
-        
-        n "You search the tree and find a used condom."
-        $ a_item_condom += 1
-        $ a_items += 1
-        
-    jump a2_jump_from_collect
-    
-    return
-    
-    label a_collect_item_4:
-    
-    if a_item_egg == 1:
-       n "You search the tree again and find nothing."
-    else:
-        
-        scene a_park_blur
-        with dissolve
-        
-        show a_egg at center with dissolve
-        
-        n "You search the tree and find a bird egg."
-        $ a_item_egg += 1
-        $ a_items += 1
-        
-    jump a2_jump_from_collect
-    
-    return
-    
-    label a_collect_item_5:
-    
-    if a_item_bark == 1:
-       n "You search the tree again and find nothing."
-    else:
-        scene a_park_blur
-        with dissolve
-        
-        show a_bark at center with dissolve
-        
-        n "You search the tree and find a piece of bark."
-        $ a_item_bark += 1
-        $ a_items += 1
-        
-    jump a2_jump_from_collect
-    
-    return
+    jump main_hub_screen
 return
 
 # Amber fail date.
 
 label amber_fail_date:
 
-        stop music
+    stop music
         
-        $ renpy.block_rollback()
+    $ renpy.block_rollback()
         
-        if amber == 2:
-            show amber angry hn at center with dissolve
+    if amber == 2:
+        show amber angry hn at center with dissolve
             
-            $ a_item_2_collected = 0
-            $ a_item_3_collected = 0
-            $ a_item_4_collected = 0
-            $ a_item_5_collected = 0
-            if a_item_5_collected == 1:
-                $ a_items -= 4
-            else:
-                $ a_items = 1
-        else:
-            show amber angry at center with dissolve
-            
-            $ a_item_1_collected = 0
+        $ a_item_condom = 0
+        $ a_item_egg = 0
+        $ a_item_bark = 0
+        $ a_item_sap = 0
+        if a_item_glass == 0:
             $ a_items = 0
+        else:
+            $ a_items = 1
+    elif amber == 3:
+        show amber angry n at center with dissolve
         
-        a "I thought we really had something [amber_name]. I can't believe this."
+    elif amber == 1:
+        show amber angry at center with dissolve
+            
+        $ a_item_glass = 0
+        $ a_items = 0
         
-        play audio "audio/date_fail.tgm"
-        n "Date failed..."
+    $ achievement.grant("fail")
         
-        jump main_hub_screen     
+    a "I thought we really had something [amber_name]. I can't believe this."
+        
+    play audio "audio/date_fail.flac"
+    n "Date failed..."
+        
+    if time == 3:
+        $ time -= 2
+    else:
+        $ time += 1
+        
+    jump main_hub_screen
 return
 
 # Amber succeed dates.
@@ -573,11 +573,11 @@ label amber_succeed_date:
 
     if amber == 1:
     
-        play audio "audio/date_success.tgm"
+        play audio "audio/date_success.flac"
         n "Date Success!"
     
         scene blank
-        with dissolve
+        with irisin
     
         stop music fadeout 3.0
     
@@ -599,11 +599,11 @@ label amber_succeed_date:
                 action Jump("a_variable_update")
         return
     elif amber == 2:
-        play audio "audio/date_success.tgm"
+        play audio "audio/date_success.flac"
         n "Date Success!"
     
         scene blank
-        with dissolve
+        with irisin
     
         stop music fadeout 3.0
     
@@ -625,7 +625,7 @@ label amber_succeed_date:
                 action Jump("a_variable_update")
                 
     elif amber == 3:
-        play music "audio/amber_theme.tgm" fadein 3.0
+        play music "audio/amber_theme.flac" fadein 3.0
 
         if gender == 0:
             scene a_sex_scene_cum
@@ -688,14 +688,14 @@ label amber_succeed_date:
     
         stop music fadeout 3.0
         
-        play audio "audio/date_success.tgm"
+        play audio "audio/date_success.flac"
         if gender == 0:
             n "Date Success?"
         elif gender == 1:
             n "Date Success!"
     
         scene blank
-        with dissolve
+        with irisin
     
         if gender == 0:
             n "You might have made Amber pregnant and took her panties."
@@ -712,6 +712,10 @@ label amber_succeed_date:
     
     $ dating += 1
     $ amber += 1
+    if time == 3:
+        $ time -= 2
+    else:
+        $ time += 1
     jump main_hub_screen
     
     return
