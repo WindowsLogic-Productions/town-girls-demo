@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("Town Girls Demo - Purchase full version at: https://windowslogic.itch.io/town-girls")
+define config.name = _("Town Girls (DEMO) - Purchase the full game at https://windowslogic.itch.io/town-girls")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -29,8 +29,7 @@ define config.version = "DEMO"
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
-define gui.about = _p("Programmer: WindowsLogic, Musician: WindowsLogic, Artist: RealityReaper_BC")
-
+define gui.about = _p("Programmer: Alethila, Musician: Alethila, Artist: RealityReaper_BC, Artist: WorldsFavouriteGlitch")
 
 ## A short name for the game used for executables and directories in the built
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
