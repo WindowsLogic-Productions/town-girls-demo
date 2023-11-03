@@ -2,18 +2,992 @@
 
 label date_violet_opening:
 
-    jump date_violet_timecheck
+    $ tooltip = Tooltip("")
+    
+    $ _game_menu_screen = None
+    $ quick_menu = False
+    hide screen bodystats
+    
+    $ loading = renpy.random.randint(1, 3)
+    
+    if loading == 1:
+        scene loading_violet
+        with irisout
+    elif loading == 2:
+        scene loading_amber
+        with irisout
+    else:
+        scene loading_sierra
+        with irisout
+    
+    stop music fadeout 3.0
+    
+    $ renpy.pause(3.0, hard=True)
+    
+    play music "audio/opening.flac" loop fadein 3.0
+    
+    $ renpy.pause(3.0, hard=True)
+    
+    $ _game_menu_screen = 'save'
+    $ quick_menu = True
+    
+    scene blank
+    with dissolve
+    
+    n "You don't know anything about this girl you saw at a music shop. So you decide to search for her online to see what she's been posting."
+    
+    scene base_site_violet
+    with irisout
+    
+    label posts_p1:
+    
+        call screen date_violet_opening_objects_p1 with dissolve
+
+        screen date_violet_opening_objects_p1:
+        
+            imagebutton auto "logout_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.979
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("date_violet_timecheck")
+            
+            imagebutton auto "user_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.932
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("main_hub_screen")
+            
+            imagebutton auto "230713_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.92
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic1")
+                
+            imagebutton auto "230815_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.81
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic1")
+                
+            imagebutton auto "260416_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.7
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic2")
+                
+            imagebutton auto "030716_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.59
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic3")
+                
+            imagebutton auto "311016_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.48
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic4")
+                
+            imagebutton auto "up_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.87
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll up.") ]
+                action Jump("posts_p2")
+                
+            text tooltip.value outlines [(2, "#fff")]:
+                xpos 0.05
+                ypos 0.9
+            
+        return
+    return
+    
+    label posts_p2:
+    
+        call screen date_violet_opening_objects_p2 with dissolve
+
+        screen date_violet_opening_objects_p2:
+        
+            imagebutton auto "logout_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.979
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("date_violet_timecheck")
+            
+            imagebutton auto "user_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.932
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("main_hub_screen")
+            
+            imagebutton auto "100117_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.92
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic5")
+                
+            imagebutton auto "150117_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.81
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic5")
+                
+            imagebutton auto "250717_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.7
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic6")
+                
+            imagebutton auto "101017_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.59
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic6")
+                
+            imagebutton auto "160718_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.48
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic7")
+                
+            imagebutton auto "up_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.87
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll up.") ]
+                action Jump("posts_p3")
+                
+            imagebutton auto "down_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.95
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll down.") ]
+                action Jump("posts_p1")
+                
+            text tooltip.value outlines [(2, "#fff")]:
+                xpos 0.05
+                ypos 0.9
+            
+        return
+    return
+    
+    label posts_p3:
+    
+        call screen date_violet_opening_objects_p3 with dissolve
+
+        screen date_violet_opening_objects_p3:
+        
+            imagebutton auto "logout_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.979
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("date_violet_timecheck")
+            
+            imagebutton auto "user_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.932
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("main_hub_screen")
+            
+            imagebutton auto "140219_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.92
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic8")
+                
+            imagebutton auto "150219_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.81
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic9")
+                
+            imagebutton auto "030619_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.7
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic10")
+                
+            imagebutton auto "160719_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.59
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic11")
+                
+            imagebutton auto "010819_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.48
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic12")
+                
+            imagebutton auto "up_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.87
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll up.") ]
+                action Jump("posts_p4")
+                
+            imagebutton auto "down_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.95
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll down.") ]
+                action Jump("posts_p2")
+                
+            text tooltip.value outlines [(2, "#fff")]:
+                xpos 0.05
+                ypos 0.9
+            
+        return
+    return
+    
+    label posts_p4:
+    
+        call screen date_violet_opening_objects_p4 with dissolve
+
+        screen date_violet_opening_objects_p4:
+        
+            imagebutton auto "logout_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.979
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("date_violet_timecheck")
+            
+            imagebutton auto "user_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.932
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("main_hub_screen")
+            
+            imagebutton auto "140220_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.92
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic13")
+                
+            imagebutton auto "150220_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.81
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic14")
+                
+            imagebutton auto "140520_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.7
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic15")
+                
+            imagebutton auto "160720_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.59
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic16")
+                
+            imagebutton auto "311020_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.48
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic17")
+                
+            imagebutton auto "up_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.87
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll up.") ]
+                action Jump("posts_p5")
+                
+            imagebutton auto "down_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.95
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll down.") ]
+                action Jump("posts_p3")
+                
+            text tooltip.value outlines [(2, "#fff")]:
+                xpos 0.05
+                ypos 0.9
+            
+        return
+    return
+    
+    label posts_p5:
+    
+        call screen date_violet_opening_objects_p5 with dissolve
+
+        screen date_violet_opening_objects_p5:
+        
+            imagebutton auto "logout_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.979
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("date_violet_timecheck")
+            
+            imagebutton auto "user_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.932
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("main_hub_screen")
+            
+            imagebutton auto "140221_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.92
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic18")
+                
+            imagebutton auto "150221_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.81
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic19")
+                
+            imagebutton auto "160221_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.7
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic20")
+                
+            imagebutton auto "080421_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.59
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic21")
+                
+            imagebutton auto "120821_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.48
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic22")
+                
+            imagebutton auto "up_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.87
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll up.") ]
+                action Jump("posts_p6")
+                
+            imagebutton auto "down_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.95
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll down.") ]
+                action Jump("posts_p4")
+                
+            text tooltip.value outlines [(2, "#fff")]:
+                xpos 0.05
+                ypos 0.9
+            
+        return
+    return
+    
+    label posts_p6:
+    
+        call screen date_violet_opening_objects_p6 with dissolve
+
+        screen date_violet_opening_objects_p6:
+        
+            imagebutton auto "logout_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.979
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("date_violet_timecheck")
+            
+            imagebutton auto "user_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.932
+                ypos 0.018
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("main_hub_screen")
+            
+            imagebutton auto "251221_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.92
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic23")
+                
+            imagebutton auto "140222_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.81
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic24")
+                
+            imagebutton auto "150222_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.7
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic25")
+                
+            imagebutton auto "160322_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.59
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic26")
+                
+            imagebutton auto "190422_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.631
+                ypos 0.48
+                hovered [ Play("audio", "audio/select.flac") ]
+                action Jump("online_pic27")
+                
+            imagebutton auto "down_arrow_%s":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.23
+                ypos 0.95
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll down.") ]
+                action Jump("posts_p5")
+                
+            text tooltip.value outlines [(2, "#fff")]:
+                xpos 0.05
+                ypos 0.9
+            
+        return
+    return
+    
+    label online_pic1:
+    
+        call screen online_pic1 with dissolve
+        
+        screen online_pic1:
+        
+            imagebutton idle "v_start_0":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p1")
+            
+        return
+    return
+
+    label online_pic2:
+    
+        call screen online_pic2 with dissolve
+        
+        screen online_pic2:
+        
+            imagebutton idle "v_start_1":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p1")
+            
+        return
+    return
+    
+    label online_pic3:
+    
+        call screen online_pic3 with dissolve
+        
+        screen online_pic3:
+        
+            imagebutton idle "v_start_2":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p1")
+            
+        return
+    return
+
+    label online_pic4:
+    
+        call screen online_pic4 with dissolve
+        
+        screen online_pic4:
+        
+            imagebutton idle "v_start_3":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p1")
+            
+        return
+    return
+    
+    label online_pic5:
+    
+        call screen online_pic5 with dissolve
+        
+        screen online_pic5:
+        
+            imagebutton idle "v_start_4":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p2")
+            
+        return
+    return
+    
+    label online_pic6:
+    
+        call screen online_pic6 with dissolve
+        
+        screen online_pic6:
+        
+            imagebutton idle "v_start_5":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p2")
+            
+        return
+    return
+    
+    label online_pic7:
+    
+        call screen online_pic7 with dissolve
+        
+        screen online_pic7:
+        
+            imagebutton idle "v_start_6":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p2")
+            
+        return
+    return
+    
+    label online_pic8:
+    
+        call screen online_pic8 with dissolve
+        
+        screen online_pic8:
+        
+            imagebutton idle "v_start_7":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p3")
+            
+        return
+    return
+    
+    label online_pic9:
+    
+        call screen online_pic9 with dissolve
+        
+        screen online_pic9:
+        
+            imagebutton idle "v_start_11":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p3")
+            
+        return
+    return
+    
+    label online_pic10:
+    
+        call screen online_pic10 with dissolve
+        
+        screen online_pic10:
+        
+            imagebutton idle "v_start_8":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p3")
+            
+        return
+    return
+    
+    label online_pic11:
+    
+        call screen online_pic11 with dissolve
+        
+        screen online_pic11:
+        
+            imagebutton idle "v_start_9":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p3")
+            
+        return
+    return
+    
+    label online_pic12:
+    
+        call screen online_pic12 with dissolve
+        
+        screen online_pic12:
+        
+            imagebutton idle "v_start_10":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p3")
+            
+        return
+    return
+    
+    label online_pic13:
+    
+        call screen online_pic13 with dissolve
+        
+        screen online_pic13:
+        
+            imagebutton idle "v_start_7":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p4")
+            
+        return
+    return
+    
+    label online_pic14:
+    
+        call screen online_pic14 with dissolve
+        
+        screen online_pic14:
+        
+            imagebutton idle "v_start_11":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p4")
+            
+        return
+    return
+    
+    label online_pic15:
+    
+        call screen online_pic15 with dissolve
+        
+        screen online_pic15:
+        
+            imagebutton idle "v_start_5":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p4")
+            
+        return
+    return
+    
+    label online_pic16:
+    
+        call screen online_pic16 with dissolve
+        
+        screen online_pic16:
+        
+            imagebutton idle "v_start_12":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p4")
+            
+        return
+    return
+    
+    label online_pic17:
+    
+        call screen online_pic17 with dissolve
+        
+        screen online_pic17:
+        
+            imagebutton idle "v_start_13":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p4")
+            
+        return
+    return
+    
+    label online_pic18:
+    
+        call screen online_pic18 with dissolve
+        
+        screen online_pic18:
+        
+            imagebutton idle "v_start_7":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p5")
+            
+        return
+    return
+    
+    label online_pic19:
+    
+        call screen online_pic19 with dissolve
+        
+        screen online_pic19:
+        
+            imagebutton idle "v_start_11":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p5")
+            
+        return
+    return
+    
+    label online_pic20:
+    
+        call screen online_pic20 with dissolve
+        
+        screen online_pic20:
+        
+            imagebutton idle "v_start_14":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p5")
+            
+        return
+    return
+    
+    label online_pic21:
+    
+        call screen online_pic21 with dissolve
+        
+        screen online_pic21:
+        
+            imagebutton idle "v_start_16":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p5")
+            
+        return
+    return
+    
+    label online_pic22:
+    
+        call screen online_pic22 with dissolve
+        
+        screen online_pic22:
+        
+            imagebutton idle "v_start_2":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p5")
+            
+        return
+    return
+    
+    label online_pic23:
+    
+        call screen online_pic23 with dissolve
+        
+        screen online_pic23:
+        
+            imagebutton idle "v_start_15":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p6")
+            
+        return
+    return
+    
+    label online_pic24:
+    
+        call screen online_pic24 with dissolve
+        
+        screen online_pic24:
+        
+            imagebutton idle "v_start_17":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p6")
+            
+        return
+    return
+    
+    label online_pic25:
+    
+        call screen online_pic25 with dissolve
+        
+        screen online_pic25:
+        
+            imagebutton idle "v_start_11":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p6")
+            
+        return
+    return
+    
+    label online_pic26:
+    
+        call screen online_pic26 with dissolve
+        
+        screen online_pic26:
+        
+            imagebutton idle "v_start_8":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p6")
+            
+        return
+    return
+    
+    label online_pic27:
+    
+        call screen online_pic27 with dissolve
+        
+        screen online_pic27:
+        
+            imagebutton idle "v_start_5":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("posts_p6")
+            
+        return
+    return  
 return
 
 # Check time of game to determine if dates are possible.
 
 label date_violet_timecheck:
 
-    scene loading
-    with irisout
+    hide screen bodystats
+
+    $ loading = renpy.random.randint(1, 3)
+    
+    if loading == 1:
+        scene loading_violet
+        with irisout
+    elif loading == 2:
+        scene loading_amber
+        with irisout
+    else:
+        scene loading_sierra
+        with irisout
     
     $ _game_menu_screen = None
     $ quick_menu = False
+    
+    $ renpy.pause(3.0, hard=True)
 
     if time == 1:
         
@@ -36,7 +1010,7 @@ label date_violet_timecheck:
     
         pause 3.0
     
-        play music "audio/time_advance_ph.flac" loop fadein 3.0
+        play music "audio/violet_stalking.flac" loop fadein 3.0
     
         pause 3.0
         
@@ -51,6 +1025,7 @@ label date_violet_timecheck:
                 n "You sleep until it's morning."
                 
                 $ time = 1
+                $ bladder = 2
                 
                 jump main_hub_screen
                 
@@ -76,12 +1051,17 @@ label date_violet_timecheck:
                     scene v_sleeping
                     with pixellate
                 else:
-                    n "You find Violet sleeping naked, so you decide to fuck her while she's asleep."
-                    
+                    if gender == 0:
+                        n "You find Violet sleeping naked, so you decide to fuck her while she's asleep."
+                    else:
+                        n "You find Violet sleeping naked, so you decide to shove a dildo filled with cum inside her while she's asleep."
                     scene v_sleeping
                     with pixellate
                 
+                pause 120.0
+                
                 $ time = 1
+                $ bladder = 2
                 
                 stop music fadeout 3.0
     
@@ -105,12 +1085,23 @@ label date_violet_1_pc:
     scene v_house_front
     with irisout
     
+    show screen bodystats
+    
     play music "audio/nature.flac" loop fadein 3.0
     
     n "You arrive at the Arctic Fox's house and see her outside with her garage open."
     
     scene v_house_front_pc
     with dissolve
+    
+    label v1_jump_from_collect:
+    
+        if window_crack_a == 1:
+            scene v_house_front_crack
+            with dissolve
+        else:
+            scene v_house_front_pc
+            with dissolve
     
     call screen date_violet_1_objects with dissolve
 
@@ -122,7 +1113,7 @@ label date_violet_1_pc:
             xpos 0.334
             ypos 0.35
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("The Arctic Fox's electric guitar is so cool.") ]
-            clicked [ Play("sound", "audio/e_guitar_strum.flac") ]
+            action Jump("v_collect_item_3")
             
         imagebutton auto "violet/date_1/v_acoustic_%s.png":
             xanchor 0.5
@@ -130,7 +1121,7 @@ label date_violet_1_pc:
             xpos 0.366
             ypos 0.356
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("It rattles.") ]
-            clicked [ Play("sound", "audio/guitar_strum.flac") ]
+            action Jump("v_collect_item_3")
             
         imagebutton auto "violet/date_1/v_amp_%s.png":
             xanchor 0.5
@@ -138,7 +1129,7 @@ label date_violet_1_pc:
             xpos 0.4
             ypos 0.426
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Pretty rad amp with tons of dials.") ]
-            clicked [ Play("sound", "audio/amp.flac") ]
+            action Jump("v_collect_item_4")
             
         imagebutton auto "violet/date_1/v_wires_left_%s.png":
             xanchor 0.5
@@ -146,7 +1137,7 @@ label date_violet_1_pc:
             xpos 0.27
             ypos 0.401
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Just a bunch of audio cables.") ]
-            clicked [ Play("sound", "audio/boing.flac") ]
+            action Jump("v_collect_item_5")
             
         imagebutton auto "violet/date_1/v_wires_right_%s.png":
             xanchor 0.5
@@ -154,7 +1145,7 @@ label date_violet_1_pc:
             xpos 0.46
             ypos 0.380
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Just a bunch of audio cables.") ]
-            clicked [ Play("sound", "audio/boing.flac") ]
+            action Jump("v_collect_item_5")
             
         imagebutton auto "violet/date_1/v_mini_amp_%s.png":
             xanchor 0.5
@@ -162,7 +1153,7 @@ label date_violet_1_pc:
             xpos 0.47
             ypos 0.41
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A miniture tube amp.") ]
-            clicked [ Play("sound", "audio/amp.flac") ]
+            action Jump("v_collect_item_4")
             
         imagebutton auto "violet/date_1/tree_%s.png":
             xanchor 0.5
@@ -170,7 +1161,7 @@ label date_violet_1_pc:
             xpos 0.864
             ypos 0.337
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("I'd like to be a tree.") ]
-            clicked [ Play("sound", "audio/tree.flac") ]
+            action Jump("v_collect_item_2")
             
         if window_crack_v == 0:
             imagebutton auto "violet/date_1/v_window_%s.png":
@@ -189,7 +1180,7 @@ label date_violet_1_pc:
                 hovered [ Play("audio", "audio/select.flac"), tooltip.Action("A small crack appeared.") ]
                 clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("Another small crack appeared."), SetVariable("window_crack_v", 2) ]
         elif window_crack_v == 2:
-            imagebutton auto "violet/date_1/v_window_%s.png":
+            imagebutton auto "v_window_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.053
@@ -197,7 +1188,7 @@ label date_violet_1_pc:
                 hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Another small crack appeared.") ]
                 clicked [ Play("sound", "audio/glass_knock.flac"), tooltip.Action("A bigger crack appeared."), SetVariable("window_crack_v", 3) ]
         elif window_crack_v == 3:
-            imagebutton auto "violet/date_1/v_window_%s.png":
+            imagebutton auto "v_window_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.053
@@ -207,13 +1198,13 @@ label date_violet_1_pc:
                 
         else:
         
-            imagebutton idle "violet/date_1/v_window_cracked.png":
+            imagebutton idle "v_window_cracked":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.053
                 ypos 0.351
-                hovered [ tooltip.Action("You broke the window.") ]
-                action tooltip.Action("You broke the window.")
+                hovered [ tooltip.Action("You broke Violet's window.") ]
+                action Jump("v_collect_item_1")
         
         if window_crack_v == 4:
         
@@ -239,6 +1230,115 @@ label date_violet_1_pc:
             xpos 0.1
             ypos 0.1
     return
+    return
+    
+    label v_collect_item_1:
+    
+        if v_item_glass == 1:
+        
+            scene v_house_front_crack
+            with dissolve
+        
+            n "You search around Violet's house again and find nothing."
+        else:
+        
+            scene v_house_front_crack_blur
+            with dissolve
+        
+            show v_glass_shard at center with dissolve
+        
+            n "You search around the area of Violet's house and find a shard of glass."
+            $ v_item_glass += 1
+            $ v_items += 1
+        
+            hide v_glass_shard at center with dissolve
+        
+        jump v1_jump_from_collect
+    return
+    
+    label v_collect_item_2:
+        if v_item_bark == 1:
+            
+            n "You search around the tree again and find nothing."
+        else:
+            
+            scene v_house_front_crack_blur
+            with dissolve
+            
+            show v_bark at center with dissolve
+            
+            n "You search around the tree and find a piece of bark."
+            
+            $ v_item_bark += 1
+            $ v_items += 1
+            
+            hide v_bark at center with dissolve
+            
+        jump v1_jump_from_collect
+    return
+    
+    label v_collect_item_3:
+    
+        if v_item_pick == 1:
+        
+            n "You search around the guitar again and find nothing."
+        else:
+        
+            scene v_house_front_crack_blur
+            with dissolve
+        
+            show v_pick at center with dissolve
+        
+            n "You search around the around the guitar and find a pick."
+            $ v_item_pick += 1
+            $ v_items += 1
+        
+            hide v_pick at center with dissolve
+        
+        jump v1_jump_from_collect 
+    return
+    
+    label v_collect_item_4:
+    
+        if v_item_tube == 1:
+        
+            n "You search around the amp again and find nothing."
+        else:
+        
+            scene v_house_front_crack_blur
+            with dissolve
+        
+            show v_tube at center with dissolve
+        
+            n "You search around the around the amp and find a tube."
+            $ v_item_tube += 1
+            $ v_items += 1
+        
+            hide v_tube at center with dissolve
+        
+        jump v1_jump_from_collect 
+    return
+    
+    label v_collect_item_5:
+    
+        if v_item_cable == 1:
+        
+            n "You search around the audio cables again and find nothing."
+        else:
+        
+            scene v_house_front_crack_blur
+            with dissolve
+        
+            show v_cable at center with dissolve
+        
+            n "You search around the around the audio cables and find a gold-tipped cable."
+            $ v_item_cable += 1
+            $ v_items += 1
+        
+            hide v_cable at center with dissolve
+        
+        jump v1_jump_from_collect 
+    return
 return
 
 label date_violet_1:
@@ -259,7 +1359,7 @@ label date_violet_1:
     
     pause 3.0
     
-    play music "audio/violet_theme.flac" loop fadein 3.0
+    play music "audio/violet_theme_date_1.flac" loop fadein 3.0
     
     show violet neutral at center with dissolve
     
@@ -414,6 +1514,8 @@ label date_violet_2_pc:
     scene v_abandoned_cinema
     with irisout
     
+    show screen bodystats
+    
     play music "audio/abandoned.flac" loop fadein 3.0
     
     n "Violet visits you at your place and takes you to an abandoned cinema. The vacant venue reeks with the smell of fish."
@@ -467,8 +1569,8 @@ label date_violet_2_pc:
         imagebutton auto "violet/date_2/violet_click_cinema_%s.png":
             xanchor 0.5
             yanchor 0.5
-            xpos 0.8
-            ypos 0.452
+            xpos 0.5
+            ypos 0.7
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Violet: Having fun exploring? Sorry about the\nsmell, I use this place for alone time. It's a very\nnice sense of freedom and risk.") ]
             action Jump("date_violet_2")
             
@@ -484,7 +1586,7 @@ label date_violet_2:
     
     pause 3.0
    
-    play music "audio/violet_theme_c.flac" loop fadein 3.0
+    play music "audio/violet_theme_date_2.flac" loop fadein 3.0
     
     scene v_abandoned_cinema
     with dissolve
@@ -669,6 +1771,8 @@ label date_violet_2:
                             
                             v "Okay, that's fine by me [violet_name]."
                             
+                            $ bladder = 1
+                            
                             show violet underwear_happy at center with dissolve
                             
                             v "Emptied your bladder? Pee boy."
@@ -678,7 +1782,21 @@ label date_violet_2:
                             
                             $ renpy.block_rollback()
             
-                            v "You need to purchase the full game before you can pee on me. https://windowslogic.itch.io/town-girls"
+                            v "Nice, let me get undressed first."
+                            
+                            show violet naked at center with dissolve
+                    
+                            v "Okay, I'm ready [violet_name]!"
+                            
+                            $ bladder = 1
+                            
+                            show violet naked_pee at center with dissolve
+                    
+                            v "It feels so warm."
+                            
+                            v "But I'm now drenched in piss and it smells, so I better go home and wash myself."
+                            
+                            v "We should try dating again at some other time."
                             
                             $ achievement.grant("defecation")
                             
@@ -978,7 +2096,7 @@ label date_violet_2:
             xpos 0.7
             ypos 0.735
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("3 beats") ]
-            action Jump("fifth_question_correct")
+            action Jump("question_incorrect")
             
         imagebutton auto "violet/date_2/guitar_option_b_%s.png":
             xanchor 0.5
@@ -986,7 +2104,7 @@ label date_violet_2:
             xpos 0.75
             ypos 0.77
             hovered [ Play("audio", "audio/select.flac"), tooltip.Action("4 beats") ]
-            action Jump("question_incorrect")
+            action Jump("fifth_question_correct")
             
         imagebutton auto "violet/date_2/guitar_option_c_%s.png":
             xanchor 0.5
@@ -1094,7 +2212,7 @@ return
 label date_violet_sex:
 
     label date_violet_sex_letter:
-        n "Hold up! You need to purchase the full game to see Violet's rockstar pussy: https://windowslogic.itch.io/town-girls"
+        n "Hold up! You need to purchase the full game to see Violet's snowy clit: https://windowslogic.itch.io/town-girls"
     
         jump main_hub_screen
     return
@@ -1153,7 +2271,7 @@ label violet_succeed_date:
     
         $ achievement.grant("violet_1_success")
     
-        call screen violet_pic_1 with irisout
+        call screen violet_pic_1 with dissolve
     
         screen violet_pic_1:
         
@@ -1190,9 +2308,11 @@ label violet_succeed_date:
         
         n "You got a picture of Violet in her underwear. You can now look at this picture in the Gallery."
         
+        n "You can now revisit this location via the map."
+        
         $ achievement.grant("violet_2_success")
         
-        call screen violet_pic_2 with irisout
+        call screen violet_pic_2 with dissolve
     
         screen violet_pic_2:
         
@@ -1204,7 +2324,7 @@ label violet_succeed_date:
                 action Jump("v_variable_update")
         return
     elif violet == 3:    
-        play music "audio/violet_theme.flac" fadein 3.0
+        play music "audio/violet_theme_date_3.flac" fadein 3.0
 
         if gender == 0:
             scene v_sex_scene_cum
@@ -1269,6 +2389,15 @@ label violet_succeed_date:
     label v_variable_update:
         $ dating += 1
         $ violet += 1
+        if balls == 3:
+            $ balls += 0
+        else:
+            $ balls += 1
+            
+        if ovaries == 3:
+            $ ovaries += 0
+        else:
+            $ ovaries += 1  
         if time == 3:
             $ time -= 2
         else:
