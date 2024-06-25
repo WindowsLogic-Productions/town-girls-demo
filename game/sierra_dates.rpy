@@ -7,18 +7,10 @@ label date_sierra_opening:
     $ _game_menu_screen = None
     $ quick_menu = False
     hide screen bodystats
+    hide screen dates
+    hide screen dates_dark
     
-    $ loading = renpy.random.randint(1, 3)
-    
-    if loading == 1:
-        scene loading_violet
-        with irisout
-    elif loading == 2:
-        scene loading_amber
-        with irisout
-    else:
-        scene loading_sierra
-        with irisout
+    call loading from _call_loading_4
     
     stop music fadeout 3.0
     
@@ -31,13 +23,17 @@ label date_sierra_opening:
     $ _game_menu_screen = 'save'
     $ quick_menu = True
     
-    scene black
-    with dissolve
+    if sierra == 1:
+        scene sierra_start
+        with dissolve
     
-    n "When visiting the local art museum, you see a girl obsessing over the art, looking at the details and imperfections, you decide to search her up online."
-    
-    scene sierra_base_site
-    with irisout
+        n "When visiting the local art museum, you see a girl obsessing over the art, looking at the details and imperfections, you decide to search her up online."
+        
+        scene sierra_base_site
+        with irisout
+    else:
+        scene sierra_base_site
+        with irisout
     
     label posts_sp1:
     
@@ -45,20 +41,27 @@ label date_sierra_opening:
 
         screen date_sierra_opening_objects_ap1:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_sierra_timecheck")
+            if sierra == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_sierra_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.932
                 ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
                 action Jump("main_hub_screen")
             
             imagebutton auto "s_150416_%s":
@@ -122,20 +125,27 @@ label date_sierra_opening:
 
         screen date_sierra_opening_objects_sp2:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_sierra_timecheck")
+            if sierra == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_sierra_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.932
                 ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
                 action Jump("main_hub_screen")
             
             imagebutton auto "s_151216_%s":
@@ -207,20 +217,27 @@ label date_sierra_opening:
 
         screen date_sierra_opening_objects_ap3:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_sierra_timecheck")
+            if sierra == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_sierra_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.932
                 ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
                 action Jump("main_hub_screen")
             
             imagebutton auto "s_140818_%s":
@@ -492,18 +509,12 @@ return
 label date_sierra_timecheck:
 
     hide screen bodystats
+    hide screen dates
+    hide screen dates_dark
 
     $ loading = renpy.random.randint(1, 3)
     
-    if loading == 1:
-        scene loading_violet
-        with irisout
-    elif loading == 2:
-        scene loading_amber
-        with irisout
-    else:
-        scene loading_sierra
-        with irisout
+    call loading from _call_loading_5
     
     $ _game_menu_screen = None
     $ quick_menu = False
@@ -543,7 +554,7 @@ label date_sierra_timechecked_masturbating:
     
     pause 3.0
     
-    scene black
+    scene map_blur
     with dissolve
     
     n "Sierra doesn't want to see you right now, do you want to advance time?"
@@ -568,31 +579,31 @@ label date_sierra_timechecked_masturbating:
                 
                 n "You find Sierra sitting at her desk facing the window, squirting into a bottle."
                 
-                scene s_masturbate
+                scene s_masturbate_bottle
                 with pixellate
             elif nightstalk == 2:
             
                 n "You find Sierra sitting at her desk facing the window, just finished with squirt on her desk."
                 
-                scene s_masturbate
+                scene s_masturbate_desk
                 with pixellate
             elif nightstalk == 3:
             
                 n "You find Sierra sitting at her desk facing the window, just finished with her pussy dripping."
             
-                scene s_masturbate
+                scene s_masturbate_finished
                 with pixellate
             elif nightstalk == 4:
             
                 n "You find Sierra sitting at her desk facing the window, just finished squirt on her tablet."
             
-                scene s_masturbate
+                scene s_masturbate_tablet
                 with pixellate
             else:
                 
                 n "You find Sierra sitting at her desk facing the window, just about to squirt."
                 
-                scene s_masturbate
+                scene s_masturbate_starting
                 with pixellate
                 
             pause 120.0
@@ -617,7 +628,7 @@ label date_sierra_timechecked_asleep:
     
     pause 3.0
     
-    scene black
+    scene map_night_blur
     with dissolve
 
     n "Sierra is currently sleeping, do you want to advance time?"
@@ -641,25 +652,25 @@ label date_sierra_timechecked_asleep:
                 
                 n "You find Sierra sleeping with a pen in her vagina."
                 
-                scene s_sleeping
+                scene s_sleeping_pen
                 with pixellate
             elif nightstalk == 2:
             
                 n "You find Sierra sleeping in the middle of squirting on her bed."
             
-                scene s_sleeping
+                scene s_sleeping_squirt
                 with pixellate
             elif nightstalk == 3:
             
                 n "You find Sierra sleeping in the middle of squirting on her bed with a wet pen in her vagina."
             
-                scene s_sleeping
+                scene s_sleeping_squirt_pen
                 with pixellate
             else:
                 
                 n "You find Sierra sleeping with a wet pen in her vagina."
                 
-                scene s_sleeping
+                scene s_sleeping_wet_pen
                 with pixellate
             
             pause 120.0
@@ -921,7 +932,7 @@ label date_sierra_1:
             
             show sierra laugh at center with dissolve
             
-            s "How haven’t you got caught yet considering that’s a capital offence which can land you life in prison."
+            s "How haven’t you got caught yet considering that’s a capital offense which can land you life in prison."
             
             s "You being a bad boy is kinda hot."
             
@@ -1051,7 +1062,6 @@ return
 # Sierra second date.
 
 label date_sierra_2_pc:
-
     n "Hold up! You need to purchase the full game to see Sierra's massive vulva: https://windowslogic.itch.io/town-girls"
     
     jump main_hub_screen
@@ -1067,6 +1077,8 @@ label sierra_fail_date:
         
     if sierra == 2:
         show sierra angry hn at center with dissolve
+        
+        $ s_fingered = 0
             
         #$ a_item_condom = 0
         #$ a_item_egg = 0
@@ -1163,16 +1175,16 @@ label sierra_succeed_date:
         if gender == 0:
             if s_wherefucked == 0:
                 scene s_sex_scene_finished0
-                with dissolve
+                with flash
             elif s_wherefucked == 1:
                 scene s_sex_scene_finished1
-                with dissolve
+                with flash
             else:
                 scene s_sex_scene_finished2
-                with dissolve
+                with flash
         if gender == 1:
             scene s_sex_scene_finishedg
-            with dissolve
+            with flash
             
         s "So... Warm... So... Lovely..."
         
@@ -1183,15 +1195,26 @@ label sierra_succeed_date:
                 
                 s "I hope I'm not preg-"
                 
+                scene sierra_ending_cum
+                with dissolve
+                
+                n "Sierra passes out after cumming inside her."
+                
             else:
                 s "You came so much..."
                 
+                scene sierra_ending_cum
+                with dissolve
+                
+                n "After Sierra passes out, you fuck her until you cum in her pussy for good measure."
+                
         elif gender == 1:
             s "You're one wet and wild girl..."
-        
-        n "Sierra passes out after you finish."
-        
-        # TODO: End scene needed.
+            
+            scene sierra_ending_wet
+            with dissolve
+            
+            n "Sierra passes out after you squirt all over her."
         
         $ renpy.block_rollback()
     
@@ -1202,18 +1225,11 @@ label sierra_succeed_date:
             n "Date Success?"
         elif gender == 1:
             n "Date Success!"
-    
+            
         scene blank
-        with irisin
-    
-        if gender == 0:
-            if s_wherefucked == 0:
-           
-                n "You might have made Sierra pregnant and took her panties."
-            else:
-                n "You took Sierra's panties."
-        elif gender == 1:
-            n "You took Sierra's panties."
+        with irisout
+            
+        $ renpy.movie_cutscene("video/ya_got_sierra.webm")
         
         $ achievement.grant("sierra_3_success")
     

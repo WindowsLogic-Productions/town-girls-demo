@@ -101,15 +101,15 @@ screen dates_dark:
     # General hub button settings.
     
     if time == 1:
-        text "Time: 10 AM":
+        image "hub/clock_10AM.png":
             xpos 0.8
             ypos 0.44
     elif time == 2:
-        text "Time: 2 PM":
+        image "hub/clock_2PM.png":
             xpos 0.8
             ypos 0.44
     else:
-        text "Time: 6 PM":
+        image "hub/clock_6PM.png":
             xpos 0.8
             ypos 0.44
             
@@ -179,7 +179,7 @@ screen dates_dark:
         action Jump("outside_map")
 
     # Violet hub button settings.
-
+    
     if violet == 2:
         imagebutton auto "hub/violet_dated_dark_%s.png":
             xanchor 0.5
@@ -202,6 +202,12 @@ screen dates_dark:
             yanchor 0.5
             xpos 0.16
             ypos 0.24
+    elif violet == 5:
+        imagemap auto "hub/violet_dated3_dark_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
     else:
         imagebutton auto "hub/violet_undated_dark_%s.png":
             xanchor 0.5
@@ -210,6 +216,21 @@ screen dates_dark:
             ypos 0.24
             hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a first date with the Arctic Fox.") ]
             action Jump("date_violet_opening")
+            
+    if violet > 1:
+        imagebutton auto "cloppad_dark_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.212
+            ypos 0.346
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Violet's ClopPad.") ]
+            action Jump("date_violet_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
             
     # Amber hub button settings.
     
@@ -235,6 +256,12 @@ screen dates_dark:
             yanchor 0.5
             xpos 0.35
             ypos 0.24
+    elif amber == 5:
+        imagemap auto "hub/amber_dated3_dark_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.24
     else:
         imagebutton auto "hub/amber_undated_dark_%s.png":
             xanchor 0.5
@@ -243,6 +270,21 @@ screen dates_dark:
             ypos 0.24
             hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a first date with the Tabby Cat.") ]
             action Jump("date_amber_opening")
+            
+    if amber > 1:
+        imagebutton auto "cloppad_dark_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.402
+            ypos 0.346
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Amber's ClopPad.") ]
+            action Jump("date_amber_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
             
     # Sierra hub button settings.
     
@@ -268,6 +310,12 @@ screen dates_dark:
             yanchor 0.5
             xpos 0.54
             ypos 0.24
+    elif sierra == 5:
+        imagemap auto "hub/sierra_dated3_dark_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.54
+            ypos 0.24
     else:
         imagebutton auto "hub/sierra_undated_dark_%s.png":
             xanchor 0.5
@@ -277,6 +325,133 @@ screen dates_dark:
             hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a first date with the Red Fox.") ]
             action Jump("date_sierra_opening")
             
+    if sierra > 1:
+        imagebutton auto "cloppad_dark_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.592
+            ypos 0.346
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Sierra's ClopPad.") ]
+            action Jump("date_sierra_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
+            
+    # Crystal hub button settings.
+    
+    if crystal == 2:
+        imagebutton auto "hub/crystal_dated_dark_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a second date with Crystal.") ]
+            action Jump("date_crystal_timecheck")
+    elif crystal == 3:
+        imagebutton auto "hub/crystal_dated2_dark_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a third date with Violet.") ]
+            action Jump("date_violet_timecheck")
+    elif crystal == 4:
+        imagemap auto "hub/crystal_dated3_dark_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+    elif crystal == 5:
+        imagemap auto "hub/crystal_dated3_dark_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+    else:
+        imagebutton auto "hub/crystal_undated_dark_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a first date with the Sheep.") ]
+            action Jump("date_crystal_timecheck")
+            # ^^^ Temp. Change when opening is done!!!
+            
+    if crystal > 1:
+        imagebutton auto "cloppad_dark_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.212
+            ypos 0.646
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Crystal's ClopPad.") ]
+            action Jump("date_crystal_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
+            
+    text tooltip.value outlines [(2, "#fff")]:
+        xpos 0.11
+        ypos 0.9
+        
+    # Christine hub button settings.
+    
+    if christine == 2:
+        imagebutton auto "hub/christine_dated_dark_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.55
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a second date with Christine.") ]
+            action Jump("date_christine_timecheck")
+            # ^^^ Temp! Change when opening is complete.
+    elif christine == 3:
+        imagebutton auto "hub/amber_dated2_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.24
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a third date with Amber.") ]
+            action Jump("date_amber_timecheck")
+    elif christine == 4:
+        imagemap auto "hub/amber_dated3_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.24
+    elif christine == 5:
+        imagemap auto "hub/amber_dated3_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.24
+    else:
+        image "hub/christine_undated_dark_idle.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.55
+    
+    if christine > 2:
+        imagebutton auto "cloppad_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.402
+            ypos 0.346
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Christine's ClopPad.") ]
+            action Jump("date_christine_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
+    
     text tooltip.value outlines [(2, "#fff")]:
         xpos 0.11
         ypos 0.9
@@ -287,15 +462,15 @@ screen dates:
     # General hub button settings.
     
     if time == 1:
-        text "Time: 10 AM":
+        image "hub/clock_10AM.png":
             xpos 0.8
             ypos 0.44
     elif time == 2:
-        text "Time: 2 PM":
+        image "hub/clock_2PM.png":
             xpos 0.8
             ypos 0.44
     else:
-        text "Time: 6 PM":
+        image "hub/clock_6PM.png":
             xpos 0.8
             ypos 0.44
             
@@ -388,6 +563,12 @@ screen dates:
             yanchor 0.5
             xpos 0.16
             ypos 0.24
+    elif violet == 5:
+        imagemap auto "hub/violet_dated3_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
     else:
         imagebutton auto "hub/violet_undated_%s.png":
             xanchor 0.5
@@ -396,7 +577,22 @@ screen dates:
             ypos 0.24
             hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a first date with the Arctic Fox.") ]
             action Jump("date_violet_opening")
-            
+    
+    if violet > 1:
+        imagebutton auto "cloppad_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.212
+            ypos 0.346
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Violet's ClopPad.") ]
+            action Jump("date_violet_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
+    
     # Amber hub button settings.
     
     if amber == 2:
@@ -421,6 +617,12 @@ screen dates:
             yanchor 0.5
             xpos 0.35
             ypos 0.24
+    elif amber == 5:
+        imagemap auto "hub/amber_dated3_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.24
     else:
         imagebutton auto "hub/amber_undated_%s.png":
             xanchor 0.5
@@ -429,7 +631,22 @@ screen dates:
             ypos 0.24
             hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a first date with the Tabby Cat.") ]
             action Jump("date_amber_opening")
-            
+    
+    if amber > 1:
+        imagebutton auto "cloppad_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.402
+            ypos 0.346
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Amber's ClopPad.") ]
+            action Jump("date_amber_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
+    
     # Sierra hub button settings.
     
     if sierra == 2:
@@ -454,6 +671,12 @@ screen dates:
             yanchor 0.5
             xpos 0.54
             ypos 0.24
+    elif sierra == 5:
+        imagemap auto "hub/sierra_dated3_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.54
+            ypos 0.24
     else:
         imagebutton auto "hub/sierra_undated_%s.png":
             xanchor 0.5
@@ -463,6 +686,129 @@ screen dates:
             hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a first date with the Red Fox.") ]
             action Jump("date_sierra_opening")
             
+    if sierra > 1:
+        imagebutton auto "cloppad_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.592
+            ypos 0.346
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Sierra's ClopPad.") ]
+            action Jump("date_sierra_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
+            
+    # Crystal hub button settings.
+    
+    if crystal == 2:
+        imagebutton auto "hub/crystal_dated_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a second date with Crystal.") ]
+            action Jump("date_crystal_timecheck")
+    elif crystal == 3:
+        imagebutton auto "hub/violet_dated2_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a third date with Violet.") ]
+            action Jump("date_crystal_timecheck")
+    elif crystal == 4:
+        imagemap auto "hub/violet_dated3_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+    elif crystal == 5:
+        imagemap auto "hub/violet_dated3_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+    else:
+        imagebutton auto "hub/crystal_undated_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.55
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a first date with the Sheep.") ]
+            action Jump("date_crystal_timecheck")
+            # ^^^ Temp. Change when opening is done!!!
+            
+    if crystal > 1:
+        imagebutton auto "cloppad_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.212
+            ypos 0.646
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Crystal's ClopPad.") ]
+            action Jump("date_crystal_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
+    
+    # Christine hub button settings.
+    
+    if christine == 2:
+        imagebutton auto "hub/christine_dated_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.55
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a second date with Christine.") ]
+            action Jump("date_christine_timecheck")
+            # ^^^ Temp. Change when opening is done!!!
+    elif christine == 3:
+        imagebutton auto "hub/amber_dated2_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.24
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go on a third date with Amber.") ]
+            action Jump("date_amber_timecheck")
+    elif christine == 4:
+        imagemap auto "hub/amber_dated3_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.24
+    elif christine == 5:
+        imagemap auto "hub/amber_dated3_%s.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.24
+    else:
+        image "hub/christine_undated_idle.png":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.35
+            ypos 0.55
+    
+    if christine > 2:
+        imagebutton auto "cloppad_%s":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.402
+            ypos 0.346
+            hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to Christine's ClopPad.") ]
+            action Jump("date_amber_opening")
+    else:
+        image "debug":
+            xanchor 0.5
+            yanchor 0.5
+            xpos 0.16
+            ypos 0.24
+    
     text tooltip.value outlines [(2, "#fff")]:
         xpos 0.11
         ypos 0.9

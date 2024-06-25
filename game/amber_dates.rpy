@@ -7,18 +7,10 @@ label date_amber_opening:
     $ _game_menu_screen = None
     $ quick_menu = False
     hide screen bodystats
+    hide screen dates
+    hide screen dates_dark
     
-    $ loading = renpy.random.randint(1, 3)
-    
-    if loading == 1:
-        scene loading_violet
-        with irisout
-    elif loading == 2:
-        scene loading_amber
-        with irisout
-    else:
-        scene loading_sierra
-        with irisout
+    call loading from _call_loading_2
     
     stop music fadeout 3.0
     
@@ -31,13 +23,17 @@ label date_amber_opening:
     $ _game_menu_screen = 'save'
     $ quick_menu = True
     
-    scene black
-    with dissolve
+    if amber == 1:
+        scene amber_pre-opening
+        with dissolve
     
-    n "When going shopping at the local supermarket, you see a tabby cat and decide to search her up online."
-    
-    scene amber_base_site
-    with irisout
+        n "When going shopping at the local supermarket, you see a tabby cat and decide to search her up online."
+        
+        scene amber_base_site
+        with irisout
+    else:
+        scene amber_base_site
+        with irisout
     
     label posts_ap1:
     
@@ -45,13 +41,20 @@ label date_amber_opening:
 
         screen date_violet_opening_objects_ap1:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_amber_timecheck")
+            if amber == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_amber_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
@@ -122,13 +125,20 @@ label date_amber_opening:
 
         screen date_amber_opening_objects_ap2:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_amber_timecheck")
+            if amber == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_amber_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
@@ -154,19 +164,11 @@ label date_amber_opening:
                 hovered [ Play("audio", "audio/select.flac") ]
                 action Jump("online_pic_a4")
                 
-            imagebutton auto "100821_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.631
-                ypos 0.7
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("online_pic_a5")
-                
             imagebutton auto "171021_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.631
-                ypos 0.59
+                ypos 0.7
                 hovered [ Play("audio", "audio/select.flac") ]
                 action Jump("online_pic_a6")
                 
@@ -174,55 +176,10 @@ label date_amber_opening:
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.631
-                ypos 0.48
+                ypos 0.59
                 hovered [ Play("audio", "audio/select.flac") ]
                 action Jump("online_pic_a7")
                 
-            imagebutton auto "up_arrow_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.23
-                ypos 0.87
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll up.") ]
-                action Jump("posts_ap3")
-                
-            imagebutton auto "down_arrow_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.23
-                ypos 0.95
-                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll down.") ]
-                action Jump("posts_ap1")
-                
-            text tooltip.value outlines [(2, "#fff")]:
-                xpos 0.05
-                ypos 0.9
-            
-        return
-    return
-    
-    label posts_ap3:
-    
-        call screen date_amber_opening_objects_ap3 with dissolve
-
-        screen date_amber_opening_objects_ap3:
-        
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_amber_timecheck")
-            
-            imagebutton auto "user_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.932
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("main_hub_screen")
-            
             imagebutton auto "060422_%s":
                 xanchor 0.5
                 yanchor 0.5
@@ -231,37 +188,13 @@ label date_amber_opening:
                 hovered [ Play("audio", "audio/select.flac") ]
                 action Jump("online_pic_a8")
                 
-            image "blank_post":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.631
-                ypos 0.81
-                
-            image "blank_post":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.631
-                ypos 0.7
-                
-            image "blank_post":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.631
-                ypos 0.59
-                
-            image "blank_post":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.631
-                ypos 0.92
-                
             imagebutton auto "down_arrow_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.23
                 ypos 0.95
                 hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Scroll down.") ]
-                action Jump("posts_ap2")
+                action Jump("posts_ap1")
                 
             text tooltip.value outlines [(2, "#fff")]:
                 xpos 0.05
@@ -645,7 +578,7 @@ label date_amber_opening:
                 yanchor 0.5
                 xpos 0.5
                 ypos 0.5
-                action Jump("posts_ap3")
+                action Jump("posts_ap2")
             
         return
     return
@@ -656,18 +589,10 @@ return
 label date_amber_timecheck:
 
     hide screen bodystats
+    hide screen dates
+    hide screen dates_dark
 
-    $ loading = renpy.random.randint(1, 3)
-    
-    if loading == 1:
-        scene loading_violet
-        with irisout
-    elif loading == 2:
-        scene loading_amber
-        with irisout
-    else:
-        scene loading_sierra
-        with irisout
+    call loading from _call_loading_3
     
     $ _game_menu_screen = None
     $ quick_menu = False
@@ -707,7 +632,7 @@ label date_amber_timechecked_working:
     
     pause 3.0
     
-    scene black
+    scene map_blur
     with dissolve
     
     n "Amber is currently working, do you want to advance time?"
@@ -738,19 +663,19 @@ label date_amber_timechecked_working:
             
                 n "You find Amber bent over half naked in front of the shop tills with her arse pressed against the shop window. As soon as you see her, she starts squirting on the glass."
                 
-                scene a_working
+                scene a_working_squirt
                 with pixellate
             elif nightstalk == 3:
             
                 n "You find Amber bent over half naked in front of the shop tills with her arse pressed against the shop window. She's been there a while as there's pussy juice all over the window."
             
-                scene a_working
+                scene a_working_wetpuddle
                 with pixellate
             else:
                 
                 n "You find Amber bent over half naked in front of the shop tills with her arse pressed against the shop window. As soon as you see her, she starts spraying on the glass."
                 
-                scene a_working
+                scene a_working_spray
                 with pixellate
                 
             pause 120.0
@@ -775,7 +700,7 @@ label date_amber_timechecked_asleep:
     
     pause 3.0
     
-    scene black
+    scene map_night_blur
     with dissolve
 
     n "Amber is currently sleeping, do you want to advance time?"
@@ -1210,6 +1135,7 @@ label date_amber_2_pc:
     n "Hold up! You need to purchase the full game to see Amber's tight pussy: https://windowslogic.itch.io/town-girls"
     
     jump main_hub_screen
+    
 return
 
 # Amber fail date.
@@ -1320,10 +1246,10 @@ label amber_succeed_date:
 
         if gender == 0:
             scene a_sex_scene_cum
-            with dissolve
+            with flash
         if gender == 1:
             scene a_sex_scene_squirt
-            with dissolve
+            with flash
             
         a "A- Are we done already? T- That felt really good…"
         
@@ -1359,12 +1285,11 @@ label amber_succeed_date:
             with dissolve
             
             a "I- I’m g- going t- to b- be p- pregnant…"
-                
-            # TODO: End scene needed.
-            scene blank
+            
+            scene amber_ending_cum
             with dissolve
         
-            n "Amber gets up, pushes you out of the way and runs out of the shop naked and crying leaving a trail of cum."
+            n "Amber gets up, pushes you out of the way and runs out of the shop naked and crying with cum dripping down her legs."
         elif gender == 1:
             scene a_sex_scene_squirt_neutral
             with dissolve
@@ -1372,6 +1297,11 @@ label amber_succeed_date:
             a "I- I didn't think I liked girls until I met you."
             
             a "B- But now that I've had sex with you, I'm happy it was a girl who I did it with first time."
+            
+            scene amber_ending_wet
+            with dissolve
+        
+            n "Amber gets up and runs home naked, happy about the encounter she just had."
         
         $ renpy.block_rollback()
     
@@ -1383,17 +1313,15 @@ label amber_succeed_date:
         elif gender == 1:
             n "Date Success!"
     
-        scene blank
-        with irisin
-    
         if gender == 0:
-            n "You might have made Amber pregnant and took her panties."
-            
             n "You can now revisit this location via the map."
         elif gender == 1:
-            n "You took Amber's panties."
-            
             n "You can now revisit this location via the map."
+           
+        scene blank
+        with irisout
+            
+        $ renpy.movie_cutscene("video/ya_got_amber.webm")
         
         $ achievement.grant("amber_3_success")
     
@@ -1403,22 +1331,22 @@ label amber_succeed_date:
         
     label a_variable_update:
     
-    $ dating += 1
-    $ amber += 1
-    if balls == 3:
-        $ balls += 0
-    else:
-        $ balls += 1
+        $ dating += 1
+        $ amber += 1
+        if balls == 3:
+            $ balls += 0
+        else:
+            $ balls += 1
             
-    if ovaries == 3:
-        $ ovaries += 0
-    else:
-        $ ovaries += 1  
-    if time == 3:
-        $ time -= 2
-    else:
-        $ time += 1
-    jump main_hub_screen
+        if ovaries == 3:
+            $ ovaries += 0
+        else:
+            $ ovaries += 1  
+        if time == 3:
+            $ time -= 2
+        else:
+            $ time += 1
+        jump main_hub_screen
     
     return
 

@@ -1,13 +1,84 @@
-﻿# Defined characters.
+﻿# Python crap (annoying shit).
 
-define l = Character("Literature", color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
-define pv = Character("[violet_name]", color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
-define pa = Character("[amber_name]", color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
-define ps = Character("[sierra_name]", color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
-define n = Character("Narrator", color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
-define v = Character("Violet", color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
-define a = Character("Amber", color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
-define s = Character("Sierra", color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+init python:
+    def drag_placed(drags, drop):
+        if not drop:
+            return
+
+        store.draggable = drags[0].drag_name
+        store.droppable = drop.drag_name
+        
+        return True
+        
+    def nv(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/narr_voice.flac", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound", fadeout=1)
+            
+    def lv(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/lit_voice.flac", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound", fadeout=1)
+    
+    def prov(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/protag_voice.flac", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound", fadeout=1)
+            
+    def vv(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/vio_voice.flac", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound", fadeout=1)
+            
+    def av(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/amb_voice.flac", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound", fadeout=1)
+            
+    def sv(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/sie_voice.flac", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound", fadeout=1)
+            
+    def cyv(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/cry_voice.flac", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound", fadeout=1)
+            
+    def chrv(event, **kwargs):
+        if event == "show":
+            renpy.music.play("audio/chr_voice.flac", channel="sound", loop=True)
+        elif event == "slow_done" or event == "end":
+            renpy.music.stop(channel="sound", fadeout=1)
+
+# Define narrator type "characters".
+
+define l = Character("Literature", callback=lv, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define n = Character("Narrator", callback=nv, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+
+# Define protagonist fake names.
+
+define pv = Character("[violet_name]", callback=prov, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define pa = Character("[amber_name]", callback=prov, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define ps = Character("[sierra_name]", callback=prov, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define pcy = Character("[crystal_name]", callback=prov, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define pc = Character("[christine_name]", callback=prov, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+
+# Define characters.
+
+define v = Character("Violet", callback=vv,  color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define a = Character("Amber", callback=av, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define s = Character("Sierra", callback=sv, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define cr = Character("Crystal", callback=cyv, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define ch = Character("Christine", callback=chrv, color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
+define ap = Character("April", color="#000000", who_outlines=[ (2, "#FFFFFF") ], what_outlines=[ (2, "#FFFFFF") ])
 
 # Splash screen.
 
@@ -30,8 +101,6 @@ label splashscreen:
     scene black
     with dissolve
     
-    
-    
     scene splash2
     with dissolve
     
@@ -50,17 +119,27 @@ label start:
     
     # Variable settings.
     
+    $ flash = Fade(.25, 0.0, .75, color="#fff")
     default gender = 0
+    default real_name = "REDACTED"
+    default other_info = "Manipulative sexual predator"
+    default virgin = 0
     default dating = 1
     default violet = 1
     default amber = 1
     default sierra = 1
+    default crystal = 1
+    default christine = 1
+    default april = 1
     default time = 3
     default bladder = 2
     default balls = 1
     default ovaries = 1
     default pissjar = 1
     default nightstalk = 1
+    default v_toilet_fuck = 0
+    default a_toilet_fuck = 0
+    default s_toilet_fuck = 0
     $ age = 18
     $ violet_name = ""
     $ violet_from = ""
@@ -68,6 +147,7 @@ label start:
     $ amber_from = ""
     $ sierra_name = ""
     $ sierra_from = ""
+    $ load_from = ""
     default window_crack_v = 0
     default window_crack_a = 0
     default window_cracked = 0
@@ -89,59 +169,113 @@ label start:
     default a_wet = 0
     default a_cum = 0
     default s_naked = 0
+    default ch_naked = 0
     default s_fingered = 0
     default s_clothes = 0
     default s_wherefucked = 0
     default s_items = 0
     default s_item_leaflet = 0
     default s_item_stand = 0
+    default cr_items = 0
+    default chr_items = 0
+    default ap_items = 0
     default tooltip = Tooltip("")
     default lamp = 0
     default loading = 0
 
-    # Show a blank background for the game setup.
+    # Show attention warning regarding age of characters.
     
-    scene blank
+    stop music fadeout 3.0
+    
+    scene attention
     with dissolve
     
-    stop music
+    pause 120.0
+    
+    play music "audio/game_setup.flac" loop fadein 3.0
+    
+    scene map_blur
+    with dissolve
     
     # Ask question to user if they are a boy or girl and what age they are.
     
-    n "Before we start, are you a boy or a girl? How old are you?"
+    n "Before we start, you must setup the game."
+    
+    n "Are you a boy or a girl? How old are you? What's your real name? What other information can you say about yourself? Have you lost your virginity yet?"
+    
+    n "What you choose will affect how the story is presented and how it finishes."
     menu:
-        n "What you choose will affect the story path."
         "Boy":
             $ achievement.grant("boy")
             $ gender = 0
             python:
                 try:
-                    age = int(renpy.input("Enter the age you want your character to be."))
+                    age = int(renpy.input("Enter your age."))
                 except Exception:
                     age = 18
             if age <= 18:
                 $ achievement.grant("underage")
                 $ age = 18
-            $ violet = 1
-            $ amber = 1
+            
+            $ real_name = renpy.input("Enter your real name.", length=24)
+            $ real_name = real_name.strip()
+            if real_name == "":
+                $ real_name = "REDACTED"
+            
+            $ other_info = renpy.input("Enter information about yourself.", length=4226)
+            $ other_info = other_info.strip()
+            if other_info == "":
+                $ other_info = "Manipulative sexual predator."
+                
+            n "Are you a virgin?"
+            
+            menu:
+                "Yes":
+                    n "You haven't lost your virginity yet."
+                    $ virgin = 1
+                "No":
+                    n "You have lost your virginity."
+                    $ virgin = 0
+            
             jump starting_path
         "Girl":
             $ achievement.grant("girl")
             $ gender = 1
             python:
                 try:
-                    age = int(renpy.input("Enter the age you want your character to be."))
+                    age = int(renpy.input("Enter your age."))
                 except Exception:
                     age = 18
             if age <= 18:
                 $ achievement.grant("underage")
                 $ age = 18
-            $ violet = 1
-            $ amber = 1
+            
+            $ real_name = renpy.input("Enter your real name.", length=24)
+            $ real_name = real_name.strip()
+            if real_name == "":
+                $ real_name = "REDACTED"
+            
+            $ other_info = renpy.input("Enter information about yourself.", length=42)
+            $ other_info = other_info.strip()
+            if other_info == "":
+                $ other_info = "Manipulative sexual predator"
+                
+            n "Are you a virgin?"
+            
+            menu:
+                "Yes":
+                    n "You haven't lost your virginity yet."
+                    $ virgin = 1
+                "No":
+                    n "You have lost your virginity."
+                    $ virgin = 0
+            
             jump starting_path
 return
 
 label starting_path:
+    
+    stop music fadeout 3.0
 
     $ renpy.block_rollback()
     
@@ -152,34 +286,45 @@ label starting_path:
     
     play music "audio/car_music.flac" loop fadein 3.0
     
-    play sound "audio/rain.flac" loop fadein 3.0
+    play voice "audio/rain.flac" loop fadein 3.0
     
     pause 3.0
     
     if gender == 0:
         
-        n "The rain splashes heavily in the puddles outside as if the heavens are crying, as you make your way to your destination."
+        n "The rain splashes heavily in the puddles outside as if the heavens are crying, as you make your way to your destination..."
     
-        n "The car radio drones on a discordant rock tune."
+        n "The car radio drones on a discordant rock tune as you try to make any semblance of reality..."
     
-        n "You feel a pit in your stomach as you've never been this far away from home before."
+        n "You're moving to a new, smaller town as you were banished from the town you grew up in..."
     
-        n "You're moving to a small town because your parents are divorcing."
+        n "You want to forget what happened in the past, but the thoughts of the crimes you committed keep bothering you, knocking on your door, waiting for an answer..."
 
-        n "You want to start making friends with the local girls, and maybe even get into their panties."
+        n "'The best way to get pussy and not get caught...', you think and mumble to yourself as you near your new living arrangements..."
+        
+        n "You ponder on this question... It intrigues you... What if you could get all the girls in this small town to like you...?"
+        
+        n "You wonder if they would notice you stealing their possessions, or lying to them..."
+        
+        n "The thoughts of tricking girls to like you gets your cock erect and wet..."
         
     elif gender == 1:
         
-        n "The rain splashes heavily in the puddles outside as if the heavens are crying, as you make your way to your destination."
+        n "The rain splashes heavily in the puddles outside as if the heavens are crying, as you make your way to your destination..."
     
-        n "The car radio drones on a discordant rock tune."
+        n "The car radio drones on a discordant rock tune as you try to make any semblance of reality..."
     
-        n "You feel a pit in your stomach as you've never been this far away from home before."
+        n "You're moving to a new, smaller town as you were banished from the town you grew up in..."
+    
+        n "You want to forget what happened in the past, but the thoughts of the crimes you committed keep bothering you, knocking on your door, waiting for an answer..."
 
-        n "You're moving to a small town because your attending a university there."
-    
-        n "Recently, you came out as lesbian to your old friends, but you're afraid of what the animals in this new town will think."
-    
+        n "'The best way to get pussy and not get caught...', you think and mumble to yourself as you near your new living arrangements..."
+        
+        n "You ponder on this question... It intrigues you... What if you could get all the girls in this small town to like you...?"
+        
+        n "You wonder if they would notice you stealing their possessions, or lying to them..."
+        
+        n "The thoughts of tricking girls to like you gets your pussy wet and throbbing..."
     
     scene house
     with dissolve
@@ -188,11 +333,17 @@ label starting_path:
     
     play audio "audio/thunder.flac"
     
-    n "You grab your bags and head inside. You look around and find a study with a desk and a pinboard. You decide to use this as your ''base of operations.''"
+    n "You grab your bags and head inside. You look around and find a study with a desk and a pin board..."
+    
+    n "You notice that there's already some pins on the board, so you take a closer look..."
+    
+    n "It appears to be a list of girls in this small town, or at least what species they are..."
+    
+    n "From this, you decide to use this as your ''base of operations.''"
+    
+    stop voice fadeout 3.0
     
     stop music fadeout 3.0
-    
-    stop sound fadeout 3.0
     
     jump main_hub_screen
 return
@@ -252,7 +403,10 @@ return
 
 label pissjarno:
 
-    show screen dates
+    if lamp == 1:
+        show screen dates
+    else:
+        show screen dates_dark
 
     if pissjar == 1:
         if bladder == 2:
@@ -325,8 +479,7 @@ label pissjarno:
                 menu:
                     "Empty bladder":
                         n "You empty your bladder into the filled jar and it overflows, gushing to the floor."
-                    
-                        $ pissjar += 1
+                        
                         $ bladder = 1
                         
                         jump from_piss_jar
@@ -696,7 +849,6 @@ label gallery:
             text tooltip.value outlines [(2, "#fff")]:
                 xpos 0.05
                 ypos 0.9
-        
         return
     return
     
@@ -712,6 +864,12 @@ label gallery:
                 yanchor 0.5
                 xpos 0.2
                 ypos 0.08
+                
+            image "gallery/crystal_title.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.135
+                ypos 0.52
             
             image "debug.png":
                 xanchor 0.5
@@ -726,6 +884,14 @@ label gallery:
                 ypos 0.9
                 hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
                 action Jump("from_piss_jar")
+                
+            imagebutton auto "right_arrow_%s.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.984
+                ypos 0.5
+                hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to next page.") ]
+                action Jump("gallery_page_3")
                 
             imagebutton auto "left_arrow_%s.png":
                 xanchor 0.5
@@ -836,12 +1002,80 @@ label gallery:
                     yanchor 0.5
                     xpos 0.5
                     ypos 0.67
+                    
+            if crystal >= 2:
+                imagebutton auto "gallery/gallery_crystal_1_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.1
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The picture Crystal gave you on your first date.") ]
+                    action Jump("crystal_p1")
+            else:
+                imagebutton auto "gallery/gallery_unknown_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.1
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this picture by completing the corresponding date.") ]
+                
+            if crystal >= 3:
+                imagebutton auto "gallery/gallery_amber_2_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.25
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The picture Amber gave you on your second date.") ]
+                    action Jump("amber_p2")
+            else:
+                imagebutton auto "gallery/gallery_unknown_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.25
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this picture by completing the corresponding date.") ]
+                
+            if crystal >= 4:
+                imagebutton auto "gallery/gallery_amber_3_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.4
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The picture Amber gave you in a letter before your third date.") ]
+                    action Jump("amber_p3")
+                
+            else:
+            
+                imagebutton auto "gallery/gallery_unknown_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.4
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this picture by completing the corresponding date.") ]
+                
+            if crystal >= 4:
+            
+                imagebutton auto "gallery/a_panties_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.8
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The panties you stole from Amber on the third date.") ]
+                    action Jump("gallery")
+            else:
+            
+                imagebutton idle "debug.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.6
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this item by completing the corresponding date.") ]
         
             text "Items Collected: [s_items]/2" outlines [(2, "#fff")]:
                 xpos 0.46
                 ypos 0.13
             
-            text "":
+            text "Items Collected: [cr_items]/0" outlines [(2, "#fff")]:
                 xpos 0.46
                 ypos 0.58
         
@@ -851,6 +1085,199 @@ label gallery:
         
         return
     return
+    
+    label gallery_page_3:
+        $ tooltip = Tooltip("")
+    
+        call screen gallery_items_3 with dissolve
+    
+        screen gallery_items_3:
+    
+            image "gallery/christine_title.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.2
+                ypos 0.08
+                
+            image "gallery/april_title.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.2
+                ypos 0.52
+            
+            image "debug.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.2
+                ypos 0.52
+    
+            imagebutton auto "close_%s.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.95
+                ypos 0.9
+                hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
+                action Jump("from_piss_jar")
+                
+            imagebutton auto "left_arrow_%s.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.017
+                ypos 0.5
+                hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to previous page.") ]
+                action Jump("gallery_page_2")
+ 
+            if christine >= 2:
+                imagebutton auto "gallery/gallery_christine_1_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.1
+                    ypos 0.3
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The picture Christine gave you on your first date.") ]
+                    action Jump("christine_p1")
+            else:
+                imagebutton auto "gallery/gallery_unknown_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.1
+                    ypos 0.3
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this picture by completing the corresponding date.") ]
+                
+            if christine >= 3:
+                imagebutton auto "gallery/gallery_sierra_2_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.25
+                    ypos 0.3
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The picture Sierra gave you on your second date.") ]
+                    action Jump("sierra_p2")
+            else:
+                imagebutton auto "gallery/gallery_unknown_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.25
+                    ypos 0.3
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this picture by completing the corresponding date.") ]
+                
+            if christine >= 4:
+                imagebutton auto "gallery/gallery_sierra_3_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.4
+                    ypos 0.3
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The picture Sierra gave you in a letter before your third date.") ]
+                    action Jump("sierra_p3")
+                
+            else:
+            
+                imagebutton auto "gallery/gallery_unknown_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.4
+                    ypos 0.3
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this picture by completing the corresponding date.") ]
+                
+            if christine >= 4:
+            
+                imagebutton auto "gallery/chr_panties_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.8
+                    ypos 0.3
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The panties you stole from Sierra on the third date.") ]
+                    action Jump("gallery_page_2")
+            else:
+            
+                imagebutton idle "debug.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.6
+                    ypos 0.2
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this item by completing the corresponding date.") ]
+                    
+            if april >= 2:
+                imagebutton auto "gallery/gallery_amber_1_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.1
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The picture Amber gave you on your first date.") ]
+                    action Jump("amber_p1")
+            else:
+                imagebutton auto "gallery/gallery_unknown_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.1
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this picture by completing the corresponding date.") ]
+                
+            if april >= 3:
+                imagebutton auto "gallery/gallery_amber_2_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.25
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The picture Amber gave you on your second date.") ]
+                    action Jump("amber_p2")
+            else:
+                imagebutton auto "gallery/gallery_unknown_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.25
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this picture by completing the corresponding date.") ]
+                
+            if crystal >= 4:
+                imagebutton auto "gallery/gallery_amber_3_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.4
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The picture Amber gave you in a letter before your third date.") ]
+                    action Jump("amber_p3")
+                
+            else:
+            
+                imagebutton auto "gallery/gallery_unknown_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.4
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this picture by completing the corresponding date.") ]
+                
+            if april >= 4:
+            
+                imagebutton auto "gallery/a_panties_%s.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.8
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("The panties you stole from Amber on the third date.") ]
+                    action Jump("gallery")
+            else:
+            
+                imagebutton idle "debug.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.6
+                    ypos 0.75
+                    hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Unlock this item by completing the corresponding date.") ]
+        
+            text "Items Collected: [chr_items]/2" outlines [(2, "#fff")]:
+                xpos 0.46
+                ypos 0.13
+            
+            text "Items Collected: [ap_items]/0" outlines [(2, "#fff")]:
+                xpos 0.46
+                ypos 0.58
+        
+            text tooltip.value outlines [(2, "#fff")]:
+                xpos 0.05
+                ypos 0.9
+        
+        return
+    return
+    
     # Violet pictures.
     
     label violet_p1:
@@ -1080,8 +1507,63 @@ label gallery:
                 xpos 0.95
                 ypos 0.9
                 hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
+                action Jump("gallery")      
+        return
+    return
+    
+    # Crystal pictures.
+    
+    label christine_p1:
+        
+        scene blank
+    
+        call screen christine_p1 with pixellate
+    
+        screen christine_p1:
+        
+            imagebutton idle "christine_date_1_pic":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
                 action Jump("gallery")
                 
+            imagebutton auto "close_%s.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.95
+                ypos 0.9
+                hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
+                action Jump("gallery")
+    
+        return
+    return
+    
+    # Christine pictures.
+    
+    label crystal_p1:
+        
+        scene blank
+    
+        call screen crystal_p1 with pixellate
+    
+        screen crystal_p1:
+        
+            imagebutton idle "crystal_date_1_pic":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+                action Jump("gallery")
+                
+            imagebutton auto "close_%s.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.95
+                ypos 0.9
+                hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
+                action Jump("gallery")
+    
         return
     return
     
@@ -1887,17 +2369,38 @@ label stats:
                 xpos 0.5
                 ypos 0.5
             
-            image "stats/your_information.png":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.5
-                ypos 0.29
+            text "{font=windowslogic-regular.ttf}{size=50}Your Information":
+                xpos 0.32
+                ypos 0.125
+                
+            text "{font=windowslogic-regular.ttf}{size=40}You are a Squirrel.":
+                xpos 0.32
+                ypos 0.182
+                
+            text "{font=windowslogic-regular.ttf}{size=40}Your real name is [real_name].":
+                xpos 0.32
+                ypos 0.232
+                
+            text "{font=windowslogic-regular.ttf}{size=40}Your age is [age].":
+                xpos 0.32
+                ypos 0.282
+                
+            text "{font=windowslogic-regular.ttf}{size=40}[other_info].":
+                xpos 0.32
+                ypos 0.332
+                
+            if virgin == 1:
+                text "{font=windowslogic-regular.ttf}{size=40}You are a virgin.":
+                    xpos 0.32
+                    ypos 0.382
+            elif virgin == 0:
+                text "{font=windowslogic-regular.ttf}{size=40}You are not a virgin.":
+                    xpos 0.32
+                    ypos 0.382
             
-            image "hub/date_progress_title.png":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.405
-                ypos 0.545
+            text "{font=windowslogic-regular.ttf}{size=50}Date Progress":
+                xpos 0.32
+                ypos 0.529
     
             imagebutton auto "close_%s.png":
                 xanchor 0.5
@@ -1977,16 +2480,12 @@ label stats:
                     yanchor 0.5
                     xpos 0.407
                     ypos 0.883
-                
-            text "[age]":
-                xpos 0.36
-                ypos 0.33
             
-            text "[violet_name]":
+            text "{font=windowslogic-regular.ttf}{size=40}[violet_name]":
                 xpos 0.5
                 ypos 0.67
             
-            text "[amber_name]":
+            text "{font=windowslogic-regular.ttf}{size=40}[amber_name]":
                 xpos 0.5
                 ypos 0.87
             
@@ -2009,17 +2508,38 @@ label stats:
                 xpos 0.5
                 ypos 0.5
             
-            image "stats/your_information.png":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.5
-                ypos 0.29
+            text "{font=windowslogic-regular.ttf}{size=50}Your Information":
+                xpos 0.32
+                ypos 0.125
+                
+            text "{font=windowslogic-regular.ttf}{size=40}You are a Squirrel.":
+                xpos 0.32
+                ypos 0.182
+                
+            text "{font=windowslogic-regular.ttf}{size=40}Your real name is [real_name].":
+                xpos 0.32
+                ypos 0.232
+                
+            text "{font=windowslogic-regular.ttf}{size=40}Your age is [age].":
+                xpos 0.32
+                ypos 0.282
+                
+            text "{font=windowslogic-regular.ttf}{size=40}[other_info].":
+                xpos 0.32
+                ypos 0.332
+                
+            if virgin == 1:
+                text "{font=windowslogic-regular.ttf}{size=40}You are a virgin.":
+                    xpos 0.32
+                    ypos 0.382
+            elif virgin == 0:
+                text "{font=windowslogic-regular.ttf}{size=40}You are not a virgin.":
+                    xpos 0.32
+                    ypos 0.382
             
-            image "hub/date_progress_title.png":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.405
-                ypos 0.545
+            text "{font=windowslogic-regular.ttf}{size=50}Date Progress":
+                xpos 0.32
+                ypos 0.529
     
             imagebutton auto "close_%s.png":
                 xanchor 0.5
@@ -2036,6 +2556,14 @@ label stats:
                 ypos 0.786
                 hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to previous page.") ]
                 action Jump("stats_page_1")
+                
+            imagebutton auto "right_arrow_%s.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.711
+                ypos 0.786
+                hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to next page.") ]
+                action Jump("stats_page_3")
  
             if sierra == 2:
                 image "stats/sierra_stats_1.png":
@@ -2056,7 +2584,7 @@ label stats:
                     xpos 0.407
                     ypos 0.682
             elif sierra == 5:
-                image "stats/violet_stats_4.png":
+                image "stats/sierra_stats_4.png":
                     xanchor 0.5
                     yanchor 0.5
                     xpos 0.407
@@ -2068,14 +2596,186 @@ label stats:
                     yanchor 0.5
                     xpos 0.407
                     ypos 0.682
-                
-            text "[age]":
-                xpos 0.36
-                ypos 0.33
+                    
+            if crystal == 2:
+                image "stats/crystal_stats_1.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.883
+            elif crystal == 3:
+                image "stats/crystal_stats_2.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.883
+            elif crystal == 4:
+                image "stats/crystal_stats_3.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.883
+            elif sierra == 5:
+                image "stats/crystal_stats_4.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.883
+            else:
+                $ crystal_name = ""
+                image "stats/crystal_stats_0.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.883
             
-            text "[sierra_name]":
+            text "{font=windowslogic-regular.ttf}{size=40}[sierra_name]":
                 xpos 0.5
                 ypos 0.67
+            
+            text "{font=windowslogic-regular.ttf}{size=40}[crystal_name]":
+                xpos 0.5
+                ypos 0.87
+            
+            text tooltip.value outlines [(2, "#fff")]:
+                xpos 0.05
+                ypos 0.9
+        return
+    return
+    
+    label stats_page_3:
+        $ tooltip = Tooltip("")
+    
+        call screen stats_items_3 with dissolve
+    
+        screen stats_items_3:
+    
+            image "stats/stats.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.5
+                ypos 0.5
+            
+            text "{font=windowslogic-regular.ttf}{size=50}Your Information":
+                xpos 0.32
+                ypos 0.125
+                
+            text "{font=windowslogic-regular.ttf}{size=40}You are a Squirrel.":
+                xpos 0.32
+                ypos 0.182
+                
+            text "{font=windowslogic-regular.ttf}{size=40}Your real name is [real_name].":
+                xpos 0.32
+                ypos 0.232
+                
+            text "{font=windowslogic-regular.ttf}{size=40}Your age is [age].":
+                xpos 0.32
+                ypos 0.282
+                
+            text "{font=windowslogic-regular.ttf}{size=40}[other_info].":
+                xpos 0.32
+                ypos 0.332
+            
+            if virgin == 1:
+                text "{font=windowslogic-regular.ttf}{size=40}You are a virgin.":
+                    xpos 0.32
+                    ypos 0.382
+            elif virgin == 0:
+                text "{font=windowslogic-regular.ttf}{size=40}You are not a virgin.":
+                    xpos 0.32
+                    ypos 0.382
+            
+            text "{font=windowslogic-regular.ttf}{size=50}Date Progress":
+                xpos 0.32
+                ypos 0.529
+    
+            imagebutton auto "close_%s.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.95
+                ypos 0.9
+                hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
+                action Jump("from_piss_jar")
+                
+            imagebutton auto "left_arrow_%s.png":
+                xanchor 0.5
+                yanchor 0.5
+                xpos 0.29
+                ypos 0.786
+                hovered [ Play("sound", "audio/select.flac"), tooltip.Action("Go to previous page.") ]
+                action Jump("stats_page_1")
+ 
+            if christine == 2:
+                image "stats/christine_stats_1.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.682
+            elif sierra == 3:
+                image "stats/sierra_stats_2.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.682
+            elif sierra == 4:
+                image "stats/sierra_stats_3.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.682
+            elif sierra == 5:
+                image "stats/sierra_stats_4.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.682
+            else:
+                $ christine_name = ""
+                image "stats/christine_stats_0.png":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.407
+                    ypos 0.682
+                    
+            # if crystal == 2:
+                # image "stats/crystal_stats_1.png":
+                    # xanchor 0.5
+                    # yanchor 0.5
+                    # xpos 0.407
+                    # ypos 0.883
+            # elif crystal == 3:
+                # image "stats/crystal_stats_2.png":
+                    # xanchor 0.5
+                    # yanchor 0.5
+                    # xpos 0.407
+                    # ypos 0.883
+            # elif crystal == 4:
+                # image "stats/christine_stats_3.png":
+                    # xanchor 0.5
+                    # yanchor 0.5
+                    # xpos 0.407
+                    # ypos 0.883
+            # elif sierra == 5:
+                # image "stats/christine_stats_4.png":
+                    # xanchor 0.5
+                    # yanchor 0.5
+                    # xpos 0.407
+                    # ypos 0.883
+            # else:
+                # $ crystal_name = ""
+                # image "stats/crystal_stats_0.png":
+                    # xanchor 0.5
+                    # yanchor 0.5
+                    # xpos 0.407
+                    # ypos 0.883
+            
+            text "{font=windowslogic-regular.ttf}{size=40}[christine_name]":
+                xpos 0.5
+                ypos 0.67
+            
+            # text "{font=windowslogic-regular.ttf}{size=40}[crystal_name]":
+                # xpos 0.5
+                # ypos 0.87
             
             text tooltip.value outlines [(2, "#fff")]:
                 xpos 0.05
@@ -2112,6 +2812,33 @@ label lamp:
         scene hub_girl    
 return
 
+# Loading Screen
+
+label loading:
+    $ loading = renpy.random.randint(1, 6)
+    
+    if loading == 1:
+        scene loading_violet
+        with irisout
+    elif loading == 2:
+        scene loading_amber
+        with irisout
+    elif loading == 3:
+        scene loading_sierra
+        with irisout
+    elif loading == 4:
+        scene loading_crystal
+        with irisout
+    elif loading == 5:
+        scene loading_christine
+        with irisout
+    else:
+        scene loading_emma
+        with irisout
+return
+
+# Game Over Screen
+
 label game_over:
     scene game_over
     with dissolve
@@ -2119,14 +2846,3 @@ label game_over:
     pause 3.0
 return
 
-# Python crap (annoying shit).
-
-init python:
-    def drag_placed(drags, drop):
-        if not drop:
-            return
-
-        store.draggable = drags[0].drag_name
-        store.droppable = drop.drag_name
-        
-        return True

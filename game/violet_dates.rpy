@@ -7,18 +7,10 @@ label date_violet_opening:
     $ _game_menu_screen = None
     $ quick_menu = False
     hide screen bodystats
+    hide screen dates
+    hide screen dates_dark
     
-    $ loading = renpy.random.randint(1, 3)
-    
-    if loading == 1:
-        scene loading_violet
-        with irisout
-    elif loading == 2:
-        scene loading_amber
-        with irisout
-    else:
-        scene loading_sierra
-        with irisout
+    call loading from _call_loading
     
     stop music fadeout 3.0
     
@@ -31,34 +23,45 @@ label date_violet_opening:
     $ _game_menu_screen = 'save'
     $ quick_menu = True
     
-    scene blank
-    with dissolve
+    if violet == 1:
+        scene violet_pre-opening
+        with dissolve
     
-    n "You don't know anything about this girl you saw at a music shop. So you decide to search for her online to see what she's been posting."
-    
-    scene base_site_violet
-    with irisout
-    
+        n "You don't know anything about this girl you saw at a music shop. So you decide to search for her online to see what she's been posting."
+        
+        scene base_site_violet
+        with irisout
+    else:
+        scene base_site_violet
+        with irisout
+        
     label posts_p1:
     
         call screen date_violet_opening_objects_p1 with dissolve
 
         screen date_violet_opening_objects_p1:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_violet_timecheck")
+            if violet == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_violet_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.932
                 ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
                 action Jump("main_hub_screen")
             
             imagebutton auto "230713_%s":
@@ -66,7 +69,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.92
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic1")
                 
             imagebutton auto "230815_%s":
@@ -74,7 +77,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.81
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic1")
                 
             imagebutton auto "260416_%s":
@@ -82,7 +85,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.7
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic2")
                 
             imagebutton auto "030716_%s":
@@ -90,7 +93,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.59
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic3")
                 
             imagebutton auto "311016_%s":
@@ -98,7 +101,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.48
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic4")
                 
             imagebutton auto "up_arrow_%s":
@@ -122,20 +125,27 @@ label date_violet_opening:
 
         screen date_violet_opening_objects_p2:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_violet_timecheck")
+            if violet == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_violet_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.932
                 ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
                 action Jump("main_hub_screen")
             
             imagebutton auto "100117_%s":
@@ -143,7 +153,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.92
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic5")
                 
             imagebutton auto "150117_%s":
@@ -151,7 +161,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.81
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic5")
                 
             imagebutton auto "250717_%s":
@@ -159,7 +169,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.7
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic6")
                 
             imagebutton auto "101017_%s":
@@ -167,7 +177,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.59
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic6")
                 
             imagebutton auto "160718_%s":
@@ -175,7 +185,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.48
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic7")
                 
             imagebutton auto "up_arrow_%s":
@@ -207,20 +217,27 @@ label date_violet_opening:
 
         screen date_violet_opening_objects_p3:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_violet_timecheck")
+            if violet == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_violet_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.932
                 ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
                 action Jump("main_hub_screen")
             
             imagebutton auto "140219_%s":
@@ -228,7 +245,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.92
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic8")
                 
             imagebutton auto "150219_%s":
@@ -236,7 +253,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.81
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic9")
                 
             imagebutton auto "030619_%s":
@@ -244,7 +261,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.7
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic10")
                 
             imagebutton auto "160719_%s":
@@ -252,7 +269,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.59
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic11")
                 
             imagebutton auto "010819_%s":
@@ -260,7 +277,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.48
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic12")
                 
             imagebutton auto "up_arrow_%s":
@@ -292,20 +309,27 @@ label date_violet_opening:
 
         screen date_violet_opening_objects_p4:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_violet_timecheck")
+            if violet == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_violet_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.932
                 ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
                 action Jump("main_hub_screen")
             
             imagebutton auto "140220_%s":
@@ -313,7 +337,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.92
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic13")
                 
             imagebutton auto "150220_%s":
@@ -321,7 +345,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.81
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic14")
                 
             imagebutton auto "140520_%s":
@@ -329,7 +353,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.7
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic15")
                 
             imagebutton auto "160720_%s":
@@ -337,7 +361,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.59
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic16")
                 
             imagebutton auto "311020_%s":
@@ -345,7 +369,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.48
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic17")
                 
             imagebutton auto "up_arrow_%s":
@@ -377,13 +401,20 @@ label date_violet_opening:
 
         screen date_violet_opening_objects_p5:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_violet_timecheck")
+            if violet == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_violet_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
@@ -398,7 +429,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.92
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic18")
                 
             imagebutton auto "150221_%s":
@@ -406,7 +437,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.81
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic19")
                 
             imagebutton auto "160221_%s":
@@ -414,7 +445,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.7
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic20")
                 
             imagebutton auto "080421_%s":
@@ -422,7 +453,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.59
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic21")
                 
             imagebutton auto "120821_%s":
@@ -430,7 +461,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.48
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic22")
                 
             imagebutton auto "up_arrow_%s":
@@ -462,20 +493,27 @@ label date_violet_opening:
 
         screen date_violet_opening_objects_p6:
         
-            imagebutton auto "logout_%s":
-                xanchor 0.5
-                yanchor 0.5
-                xpos 0.979
-                ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
-                action Jump("date_violet_timecheck")
+            if violet == 1:
+                imagebutton auto "logout_%s":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
+                    hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Log out and proceed to date.") ]
+                    action Jump("date_violet_timecheck")
+            else:
+                image "debug":
+                    xanchor 0.5
+                    yanchor 0.5
+                    xpos 0.979
+                    ypos 0.018
             
             imagebutton auto "user_%s":
                 xanchor 0.5
                 yanchor 0.5
                 xpos 0.932
                 ypos 0.018
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Return to the hub.") ]
                 action Jump("main_hub_screen")
             
             imagebutton auto "251221_%s":
@@ -483,7 +521,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.92
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic23")
                 
             imagebutton auto "140222_%s":
@@ -491,7 +529,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.81
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic24")
                 
             imagebutton auto "150222_%s":
@@ -499,7 +537,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.7
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic25")
                 
             imagebutton auto "160322_%s":
@@ -507,7 +545,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.59
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic26")
                 
             imagebutton auto "190422_%s":
@@ -515,7 +553,7 @@ label date_violet_opening:
                 yanchor 0.5
                 xpos 0.631
                 ypos 0.48
-                hovered [ Play("audio", "audio/select.flac") ]
+                hovered [ Play("audio", "audio/select.flac"), tooltip.Action("Click to open post content.") ]
                 action Jump("online_pic27")
                 
             imagebutton auto "down_arrow_%s":
@@ -971,18 +1009,10 @@ return
 label date_violet_timecheck:
 
     hide screen bodystats
+    hide screen dates
+    hide screen dates_dark
 
-    $ loading = renpy.random.randint(1, 3)
-    
-    if loading == 1:
-        scene loading_violet
-        with irisout
-    elif loading == 2:
-        scene loading_amber
-        with irisout
-    else:
-        scene loading_sierra
-        with irisout
+    call loading from _call_loading_1
     
     $ _game_menu_screen = None
     $ quick_menu = False
@@ -1014,7 +1044,7 @@ label date_violet_timecheck:
     
         pause 3.0
         
-        scene black
+        scene map_night_blur
         with dissolve
         
         n "It's too late to date Violet, do you want to sleep to advance time?"
@@ -1043,19 +1073,19 @@ label date_violet_timecheck:
                 elif nightstalk == 2:
                     n "You find Violet sleeping naked with wetness coming out of her vagina."
                     
-                    scene v_sleeping
+                    scene v_sleeping_wet
                     with pixellate
                 elif nightstalk == 3:
                     n "You find Violet sleeping naked with a dildo inside her vagina."
                     
-                    scene v_sleeping
+                    scene v_sleeping_dildo
                     with pixellate
                 else:
                     if gender == 0:
                         n "You find Violet sleeping naked, so you decide to fuck her while she's asleep."
                     else:
                         n "You find Violet sleeping naked, so you decide to shove a dildo filled with cum inside her while she's asleep."
-                    scene v_sleeping
+                    scene v_sleeping_cum
                     with pixellate
                 
                 pause 120.0
@@ -1363,7 +1393,7 @@ label date_violet_1:
     
     show violet neutral at center with dissolve
     
-    v "Oh hey, I think I saw from the other day. You were staring at me. The name's Violet, what's yours?"
+    v "Oh hey, I think I saw you from the other day. You were staring at me. The name's Violet, what's yours?"
     
     $ violet_name = renpy.input("Enter a name you want Violet to remember.")
     $ violet_name = violet_name.strip()
@@ -1726,8 +1756,8 @@ label date_violet_2:
             v "Is there anything else you want to do with me while we're here?"
             
             menu:
-                "Can I take a peak at your breasts?":
-                    pv "Can I take a peak at your breasts?"
+                "Can I take peek at your breasts?":
+                    pv "Can I take a peek at your breasts?"
                     
                     $ renpy.block_rollback()
             
@@ -2328,11 +2358,11 @@ label violet_succeed_date:
 
         if gender == 0:
             scene v_sex_scene_cum
-            with dissolve
+            with flash
         if gender == 1:
             $ v_wet = 1
             scene v_sex_scene_squirt
-            with dissolve
+            with flash
     
         v "Oh my God... That felt so good... I needed that so badly... Thank you..."
             
@@ -2356,12 +2386,20 @@ label violet_succeed_date:
     
             v "..."
             
-            # TODO: Add end scene.
+            scene violet_ending_boy
+            with dissolve
+            
+            n "After you leave, Violet lies on her bed worrying that she might be pregnant."
         elif gender == 1:
             
             v "I think I came."
         
             v "Your pussy felt so amazing while rubbing it on me."
+            
+            scene violet_ending_girl
+            with dissolve
+            
+            n "After you leave, Violet lies on her bed thinking about you."
     
         $ renpy.block_rollback()
     
@@ -2372,14 +2410,11 @@ label violet_succeed_date:
             n "Date Success?"
         elif gender == 1:
             n "Date Success!"
-    
+            
         scene blank
-        with dissolve
-    
-        if gender == 0:
-            n "You might have made Violet pregnant and took her panties."
-        elif gender == 1:
-            n "You took Violet's panties."
+        with irisout
+            
+        $ renpy.movie_cutscene("video/ya_got_violet.webm")
         
         $ achievement.grant("violet_3_success")
         
@@ -2387,6 +2422,7 @@ label violet_succeed_date:
         
         
     label v_variable_update:
+    
         $ dating += 1
         $ violet += 1
         if balls == 3:
